@@ -20,5 +20,5 @@ class piece:
                 print("角度 度",[numpy.rad2deg(i) for i in self.angles])
                 print("内積",self.inner_products)
 
-                def is_on_grid(self):
-                        pass
+        def is_on_grid(self):
+                pass
