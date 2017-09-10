@@ -24,6 +24,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="piece.py" />
+    <Compile Include="problem.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="procon.py" />
     <Compile Include="QR.py" />
   </ItemGroup>
