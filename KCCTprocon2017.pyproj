@@ -20,6 +20,9 @@
     <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="GUI.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="piece.py" />
     <Compile Include="procon.py" />
   </ItemGroup>
