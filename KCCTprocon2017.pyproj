@@ -25,6 +25,7 @@
     </Compile>
     <Compile Include="piece.py" />
     <Compile Include="procon.py" />
+    <Compile Include="QR.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
 </Project>

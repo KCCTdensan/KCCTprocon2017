@@ -1,18 +1,17 @@
 import re
 import math
-from collections import namedtuple
 import numpy
 
 from piece import piece
 import GUI
-
-#Point = namedtuple('Point', ['x', 'y'])
 
 class problem:
         def __init__(self,pieces,frame):
                 self.pieces=pieces
                 self.frame=frame
 
+import QR
+QR.read_QR()
 
 pieces_data="8:5 7 1 6 5 4 5 0 2 6 0:3 0 0 4 4 0 5:5 2 5 0 5 5 0 5 8 2 8:3 6 2 0 7 0 0:5 6 5 0 0 13 0 9 2 9 5:4 0 0 4 0 4 5 0 3:8 5 1 5 0 7 0 7 3 0 3 0 0 2 0 2 1:4 0 0 3 0 3 3 0 3:9 11 0 11 2 13 2 13 0 16 0 16 10 0 10 0 3 4 0".split(":")
 pieces=[]
