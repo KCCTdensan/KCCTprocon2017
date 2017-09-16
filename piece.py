@@ -22,3 +22,9 @@ class piece:
 
         def is_on_grid(self):
                 pass
+
+        def is_overlapped(self,another):
+                pass
+
+        def merge(self):
+                pass
