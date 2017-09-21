@@ -24,7 +24,14 @@ class piece:
                 pass
 
         def is_overlapped(self,another,self_vertex1,self_vertex2,another_vertex1,another_vertex2):
-                pass
+                for vertex in self.vertexes:
+                    t_a = (self_vertex1[0] - self_vertex2[0]) * (another_vertex1[1] - self_vertex1[1]) + (self_vertex1[1] - self_vertex2[1]) * (self_vertex1[0] - another_vertex1[0])
+                    t_b = (self_vertex1[0] - self_vertex2[0]) * (another_vertex2[1] - self_vertex1[1]) + (self_vertex1[1] - self_vertex2[1]) * (self_vertex1[0] - another_vertex2[0])
+                    t_c = (another_vertex1[0] - another_vertex2[0]) * (self_vertex1[1] - another_vertex1[1]) + (another_vertex1[1] - another_vertex2[1]) * (another_vertex1[0] - self_vertex1[0])
+                    t_d = (another_vertex1[0] - another_vertex2[0]) * (self_vertex2[1] - another_vertex1[1]) + (another_vertex1[1] - another_vertex2[1]) * (another_vertex1[0] - self_vertex2[0])
+
+                    if t_a * t_b < 0 and t_c * t_d < 0: return True
+                    else: return False
 
         def merge(self):
                 pass
