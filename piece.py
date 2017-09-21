@@ -21,7 +21,10 @@ class piece:
                 print("内積",self.inner_products)
 
         def is_on_grid(self):
-                pass
+                for vertex in self.vertexes:
+                        if not numpy.allclose(vertex,numpy.floor(vertex)):
+                                return False
+                return True
 
         def is_overlapped(self,another,self_vertex1,self_vertex2,another_vertex1,another_vertex2):
                 pass
