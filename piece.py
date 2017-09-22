@@ -31,3 +31,6 @@ class piece:
 
         def merge(self):
                 pass
+
+        def rotate(self):
+                print("PaperyKettleAsata TEST")
