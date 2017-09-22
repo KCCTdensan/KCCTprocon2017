@@ -30,7 +30,7 @@ class piece:
         pass
 
     def merge(self):
-        pass
+        print("Yuelia35 Test")
 
     def rotate(self):
         print("PaperyKettleAsata TEST")
