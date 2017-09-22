@@ -24,14 +24,41 @@ class piece:
                 pass
 
         def is_overlapped(self,another,self_vertex1,self_vertex2,another_vertex1,another_vertex2):
-                for vertex in self.vertexes:
-                    t_a = (self_vertex1[0] - self_vertex2[0]) * (another_vertex1[1] - self_vertex1[1]) + (self_vertex1[1] - self_vertex2[1]) * (self_vertex1[0] - another_vertex1[0])
-                    t_b = (self_vertex1[0] - self_vertex2[0]) * (another_vertex2[1] - self_vertex1[1]) + (self_vertex1[1] - self_vertex2[1]) * (self_vertex1[0] - another_vertex2[0])
-                    t_c = (another_vertex1[0] - another_vertex2[0]) * (self_vertex1[1] - another_vertex1[1]) + (another_vertex1[1] - another_vertex2[1]) * (another_vertex1[0] - self_vertex1[0])
-                    t_d = (another_vertex1[0] - another_vertex2[0]) * (self_vertex2[1] - another_vertex1[1]) + (another_vertex1[1] - another_vertex2[1]) * (another_vertex1[0] - self_vertex2[0])
+            A = self_vertex1 - another_vertex1
+            B = self_vertex2 - another_vertex2
+            print(A)
+            print(B)
+            if numpy.allclose(A,B):
+                vertex_increment = self_vertex1 - another_vertex1
+            else:
+                vertex_increment = self_vertex1 - another_vertex2
 
+            another_piece = another
+            self_piece = self
+
+            if (vertex_increment >= 0).all():
+                for vertex in another.vertexes:
+                    another_piece.vertexes += vertex_increment
+            else:
+                for vertex in self.vertexes:
+                    self_piece.vertexes += vertex_increment
+            
+            for i,self_search_vertex1 in enumerate(self_piece.vertexes):
+                if (self_search_vertex1 != self_piece.vertexes[-1]).all():
+                    self_search_vertex2 = self_piece.vertexes[i+1]
+                else:
+                    self_search_vertex2 = self_piece.vertexes[0]
+                for k,another_search_vertex1 in enumerate(another_piece.vertexes):
+                    if (another_search_vertex1 != another_piece.vertexes[-1]).all():
+                        another_search_vertex2 = another_piece.vertexes[i+1]
+                    else:
+                        another_search_vertex2 = another_piece.vertexes[0]
+                    t_a = (self_search_vertex1[0] - self_search_vertex2[0]) * (another_search_vertex1[1] - self_search_vertex1[1]) + (self_search_vertex1[1] - self_search_vertex2[1]) * (self_search_vertex1[0] - another_search_vertex1[0])
+                    t_b = (self_search_vertex1[0] - self_search_vertex2[0]) * (another_search_vertex2[1] - self_search_vertex1[1]) + (self_search_vertex1[1] - self_search_vertex2[1]) * (self_search_vertex1[0] - another_search_vertex2[0])
+                    t_c = (another_search_vertex1[0] - another_search_vertex2[0]) * (self_search_vertex1[1] - another_search_vertex1[1]) + (another_search_vertex1[1] - another_search_vertex2[1]) * (another_search_vertex1[0] - self_search_vertex1[0])
+                    t_d = (another_search_vertex1[0] - another_search_vertex2[0]) * (self_search_vertex2[1] - another_search_vertex1[1]) + (another_search_vertex1[1] - another_search_vertex2[1]) * (another_search_vertex1[0] - self_search_vertex2[0])
                     if t_a * t_b < 0 and t_c * t_d < 0: return True
-                    else: return False
+            return False
 
         def merge(self):
                 pass
