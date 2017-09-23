@@ -26,8 +26,6 @@ class piece:
         def is_overlapped(self,another,self_vertex1,self_vertex2,another_vertex1,another_vertex2):
             A = self_vertex1 - another_vertex1
             B = self_vertex2 - another_vertex2
-            print(A)
-            print(B)
             if numpy.allclose(A,B):
                 vertex_increment = self_vertex1 - another_vertex1
             else:
@@ -36,13 +34,19 @@ class piece:
             another_piece = another
             self_piece = self
 
+            print(vertex_increment)
+
             if (vertex_increment >= 0).all():
-                for vertex in another.vertexes:
-                    another_piece.vertexes += vertex_increment
+                for i,vertex in enumerate(another.vertexes):
+                    another_piece.vertexes[i] += vertex_increment
             else:
-                for vertex in self.vertexes:
-                    self_piece.vertexes += vertex_increment
+                vertex_increment *= -1
+                for i,vertex in enumerate(self.vertexes):
+                    self_piece.vertexes[i] += vertex_increment
             
+            print(self_piece.vertexes)
+            print(another_piece.vertexes)
+
             for i,self_search_vertex1 in enumerate(self_piece.vertexes):
                 if (self_search_vertex1 != self_piece.vertexes[-1]).all():
                     self_search_vertex2 = self_piece.vertexes[i+1]
@@ -50,7 +54,7 @@ class piece:
                     self_search_vertex2 = self_piece.vertexes[0]
                 for k,another_search_vertex1 in enumerate(another_piece.vertexes):
                     if (another_search_vertex1 != another_piece.vertexes[-1]).all():
-                        another_search_vertex2 = another_piece.vertexes[i+1]
+                        another_search_vertex2 = another_piece.vertexes[k+1]
                     else:
                         another_search_vertex2 = another_piece.vertexes[0]
                     t_a = (self_search_vertex1[0] - self_search_vertex2[0]) * (another_search_vertex1[1] - self_search_vertex1[1]) + (self_search_vertex1[1] - self_search_vertex2[1]) * (self_search_vertex1[0] - another_search_vertex1[0])
