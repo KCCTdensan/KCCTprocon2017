@@ -34,8 +34,6 @@ class piece:
             another_piece = another
             self_piece = self
 
-            print(vertex_increment)
-
             if (vertex_increment >= 0).all():
                 for i,vertex in enumerate(another.vertexes):
                     another_piece.vertexes[i] += vertex_increment
@@ -43,17 +41,14 @@ class piece:
                 vertex_increment *= -1
                 for i,vertex in enumerate(self.vertexes):
                     self_piece.vertexes[i] += vertex_increment
-            
-            print(self_piece.vertexes)
-            print(another_piece.vertexes)
 
             for i,self_search_vertex1 in enumerate(self_piece.vertexes):
-                if (self_search_vertex1 != self_piece.vertexes[-1]).all():
+                if not numpy.allclose(self_search_vertex1,self_piece.vertexes[-1]):
                     self_search_vertex2 = self_piece.vertexes[i+1]
                 else:
                     self_search_vertex2 = self_piece.vertexes[0]
                 for k,another_search_vertex1 in enumerate(another_piece.vertexes):
-                    if (another_search_vertex1 != another_piece.vertexes[-1]).all():
+                    if not numpy.allclose(another_search_vertex1,another_piece.vertexes[-1]):
                         another_search_vertex2 = another_piece.vertexes[k+1]
                     else:
                         another_search_vertex2 = another_piece.vertexes[0]
@@ -61,7 +56,7 @@ class piece:
                     t_b = (self_search_vertex1[0] - self_search_vertex2[0]) * (another_search_vertex2[1] - self_search_vertex1[1]) + (self_search_vertex1[1] - self_search_vertex2[1]) * (self_search_vertex1[0] - another_search_vertex2[0])
                     t_c = (another_search_vertex1[0] - another_search_vertex2[0]) * (self_search_vertex1[1] - another_search_vertex1[1]) + (another_search_vertex1[1] - another_search_vertex2[1]) * (another_search_vertex1[0] - self_search_vertex1[0])
                     t_d = (another_search_vertex1[0] - another_search_vertex2[0]) * (self_search_vertex2[1] - another_search_vertex1[1]) + (another_search_vertex1[1] - another_search_vertex2[1]) * (another_search_vertex1[0] - self_search_vertex2[0])
-                    if t_a * t_b < 0 and t_c * t_d < 0: return True
+                    if t_a * t_b < 0 and t_c * t_d < 0: return True 
             return False
 
         def merge(self):
