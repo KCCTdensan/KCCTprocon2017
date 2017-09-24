@@ -34,3 +34,7 @@ class piece:
 
     def rotate(self):
         print("PaperyKettleAsata TEST")
+
+    def flip(self):
+        self.vertexes[:,0]*=-1
+        self.vertexes[:,0]-=min(self.vertexes[:,0])
