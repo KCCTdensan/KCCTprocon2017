@@ -1,5 +1,6 @@
 import math
 import numpy
+import copy
 class piece:
         def __init__(self,vertexes):
                 self.vertexes=vertexes;
@@ -24,7 +25,7 @@ class piece:
                 pass
 
         def is_overlapped(self,another,self_vertex1,self_vertex2,another_vertex1,another_vertex2):
-            shifted_another_piece = numpy.copy(another)
+            shifted_another_piece = copy.deepcopy(another)
             shifted_another_piece.vertexes-=another.vertexes[another_vertex1] - self.vertexes[self_vertex1]
 
             print("自ピース=",self.vertexes)
