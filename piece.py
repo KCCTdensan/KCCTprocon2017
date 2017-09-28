@@ -24,30 +24,16 @@ class piece:
                 pass
 
         def is_overlapped(self,another,self_vertex1,self_vertex2,another_vertex1,another_vertex2):
-            another_piece = numpy.copy(another)
-            self_piece = numpy.copy(self)
+            shifted_another_piece = numpy.copy(another)
+            shifted_another_piece.vertexes-=another.vertexes[another_vertex1] - self.vertexes[self_vertex1]
 
-            another_piece.vertexes-=another.vertexes[another_vertex1] - self.vertexes[self_vertex1]
+            print("自ピース=",self.vertexes)
+            print("他ピース=",shifted_another_piece.vertexes)
 
-            print("自ピース=",self_piece.vertexes)
-            print("他ピース=",another_piece.vertexes)
-
-            for i,self_search_vertex1 in enumerate(self_piece.vertexes):
-                if not numpy.allclose(self_search_vertex1,self_piece.vertexes[-1]):
-                    self_search_vertex2 = self_piece.vertexes[i+1]
-                else:
-                    self_search_vertex2 = self_piece.vertexes[0]
-                for k,another_search_vertex1 in enumerate(another_piece.vertexes):
-                    if not numpy.allclose(another_search_vertex1,another_piece.vertexes[-1]):
-                        another_search_vertex2 = another_piece.vertexes[k+1]
-                    else:
-                        another_search_vertex2 = another_piece.vertexes[0]
-                    t_a = (self_search_vertex1[0] - self_search_vertex2[0]) * (another_search_vertex1[1] - self_search_vertex1[1]) + (self_search_vertex1[1] - self_search_vertex2[1]) * (self_search_vertex1[0] - another_search_vertex1[0])
-                    t_b = (self_search_vertex1[0] - self_search_vertex2[0]) * (another_search_vertex2[1] - self_search_vertex1[1]) + (self_search_vertex1[1] - self_search_vertex2[1]) * (self_search_vertex1[0] - another_search_vertex2[0])
-                    t_c = (another_search_vertex1[0] - another_search_vertex2[0]) * (self_search_vertex1[1] - another_search_vertex1[1]) + (another_search_vertex1[1] - another_search_vertex2[1]) * (another_search_vertex1[0] - self_search_vertex1[0])
-                    t_d = (another_search_vertex1[0] - another_search_vertex2[0]) * (self_search_vertex2[1] - another_search_vertex1[1]) + (another_search_vertex1[1] - another_search_vertex2[1]) * (another_search_vertex1[0] - self_search_vertex2[0])
-                    if t_a * t_b < 0 and t_c * t_d < 0: 
-                        return True 
+            self_search_vertex2_list=self.vertexes[1:]+[self.vertexes[0]]
+            for i,self_search_vertex1 in enumerate(self.vertexes):
+                self_search_vertex2=self_search_vertex2_list[i]
+                for another_search_vertex1 in shifted_another_piece.vertexes:
                     if numpy.cross(self_search_vertex2 - self_search_vertex1,another_search_vertex1 - self_search_vertex1) < 0 : 
                         return True
             return False
