@@ -25,16 +25,16 @@ class piece:
                 pass
 
         def is_overlapped(self,another,self_vertex1,self_vertex2,another_vertex1,another_vertex2):
-            shifted_another_piece = copy.deepcopy(another)
-            shifted_another_piece.vertexes-=another.vertexes[another_vertex1] - self.vertexes[self_vertex1]
+            shifted_another_piece_vertexes = copy.deepcopy(another.vertexes)
+            shifted_another_piece_vertexes-=another.vertexes[another_vertex1] - self.vertexes[self_vertex1]
 
-            print("自ピース=",self.vertexes)
-            print("他ピース=",shifted_another_piece.vertexes)
+            print("枠\n",self.vertexes)
+            print("ピース\n",shifted_another_piece_vertexes)
 
-            self_search_vertex2_list=self.vertexes[1:]+[self.vertexes[0]]
+            self_search_vertex2_list=numpy.concatenate((self.vertexes[1:],self.vertexes[0:1]))
             for i,self_search_vertex1 in enumerate(self.vertexes):
                 self_search_vertex2=self_search_vertex2_list[i]
-                for another_search_vertex1 in shifted_another_piece.vertexes:
+                for another_search_vertex1 in shifted_another_piece_vertexes:
                     if numpy.cross(self_search_vertex2 - self_search_vertex1,another_search_vertex1 - self_search_vertex1) < 0 : 
                         return True
             return False

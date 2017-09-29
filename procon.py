@@ -8,8 +8,8 @@ from problem import problem
 
 import piece
 a=piece.piece(numpy.array([[0,0],[10,0],[10,10],[0,10]]))
-b=piece.piece(numpy.array([[0,5],[0,0],[5,0]]))
-print(a.is_overlapped(b,3,0,0,1))
+b=piece.piece(numpy.array([[0,0],[10,10],[0,10]]))
+print(a.is_overlapped(b,1,2,0,2))
 
 #import QR
 #root_problem=problem(*QR.read_QR())
