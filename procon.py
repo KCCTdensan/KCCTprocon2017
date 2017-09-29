@@ -10,6 +10,14 @@ import piece
 a=piece.piece(numpy.array([[0,0],[10,0],[10,10],[0,10]]))
 b=piece.piece(numpy.array([[0,0],[10,10],[0,10]]))
 print(a.is_overlapped(b,1,2,0,2))
+#b=piece.piece(numpy.array([[0,0],[10,10],[0,10]]))
+#print(a.is_overlapped(b,1,2,0,2))
+import datetime
+start=datetime.datetime.today()
+for i in range(1000):
+    a.is_overlapped(b,1,2,0,2)
+print(datetime.datetime.today()-start)
+
 
 #import QR
 #root_problem=problem(*QR.read_QR())
