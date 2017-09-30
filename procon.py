@@ -13,6 +13,4 @@ import problem
 
 import QR
 root_problem=problem.problem(*QR.read_QR())
-root_problem.pieces.append(a)
-root_problem.pieces.append(b)
 gui=GUI.GUI(root_problem)
