@@ -1,5 +1,6 @@
 import math
 import numpy
+import copy
 class piece:
     def __init__(self,vertexes):
         self.vertexes = vertexes
@@ -15,8 +16,29 @@ class piece:
     def is_on_grid(self):
         return numpy.allclose(self.vertexes,numpy.floor(self.vertexes))
 
-    def is_overlapped(self,another,self_vertex1,self_vertex2,another_vertex1,another_vertex2):
-        pass
+        def is_overlapped(self,another,self_vertex1,self_vertex2,another_vertex1,another_vertex2):
+            """枠selfに対して結合した時にピースが重なるか判定します
+
+            another: piece
+                ピース
+            self_vertex1:
+                枠の辺の頂点の番号，ピースの頂点 another_vertex1と重なる．
+            self_vertex2:
+                枠の辺のもうひとつの頂点の番号
+            another_vertex1:
+                ピースの辺の頂点の番号
+            another_vertex2:
+                ピースの辺のもうひとつの頂点の番号
+            """
+            shifted_another_piece_vertexes = copy.deepcopy(another.vertexes)
+            shifted_another_piece_vertexes-=another.vertexes[another_vertex1] - self.vertexes[self_vertex1]
+
+            self_search_vertex2_list=numpy.concatenate((self.vertexes[1:],self.vertexes[0:1]))
+            for i,self_search_vertex1 in enumerate(self.vertexes):
+                self_search_vertex2=self_search_vertex2_list[i]
+                if numpy.any(numpy.cross(self_search_vertex2- self_search_vertex1,shifted_another_piece_vertexes-self_search_vertex1)<0):
+                    return True
+            return False
 
     def merge(self):
         print("Yuelia35 Test")
