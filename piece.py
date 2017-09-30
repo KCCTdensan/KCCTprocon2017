@@ -29,13 +29,13 @@ class piece:
 
             another: piece
                 ピース
-            self_vertex1: numpy.ndarray(numpyの配列(array))で[[x0,y0],[x1,y1],...]の形式
+            self_vertex1:
                 枠の辺の頂点の番号，ピースの頂点 another_vertex1と重なる．
-            self_vertex2: 上に同じ
+            self_vertex2:
                 枠の辺のもうひとつの頂点の番号
-            another_vertex1: 上に同じ
+            another_vertex1:
                 ピースの辺の頂点の番号
-            another_vertex2: 上に同じ
+            another_vertex2:
                 ピースの辺のもうひとつの頂点の番号
             """
             shifted_another_piece_vertexes = copy.deepcopy(another.vertexes)
