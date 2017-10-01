@@ -12,6 +12,9 @@ class GUI():
             self.canvas.create_rectangle((piece.vertexes[0][0] + x) * zoom,piece.vertexes[0][1] * zoom,(piece.vertexes[0][0] + x) * zoom + 4,piece.vertexes[0][1] * zoom + 4,fill="blue")
             self.canvas.create_rectangle((piece.vertexes[1][0] + x) * zoom,piece.vertexes[1][1] * zoom,(piece.vertexes[1][0] + x) * zoom + 4,piece.vertexes[1][1] * zoom + 4,fill="yellow")
 
+            for i,vert in enumerate(piece.vertexes):
+                self.canvas.create_text((vert[0]+x)*zoom,vert[1]*zoom,text=i,font=("MS gothic", "15"),fill="yellow")
+
             x+=numpy.amax(piece.vertexes,axis=0)[0] + 1
         self.canvas.create_polygon([[p[0] * zoom,(p[1] + 30) * zoom] for p in self.problem.frame.vertexes])
 
