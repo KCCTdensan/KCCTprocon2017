@@ -30,9 +30,7 @@ class piece:
         another_vertex2:
             ピースの辺のもうひとつの頂点の番号
         """
-        shifted_another_piece_vertexes = copy.deepcopy(another.vertexes)
-        shifted_another_piece_vertexes-=another.vertexes[another_vertex1] - self.vertexes[self_vertex1]
-
+        shifted_another_piece_vertexes=another.vertexes-(another.vertexes[another_vertex1]-self.vertexes[self_vertex1])
         self_search_vertex2_list=numpy.concatenate((self.vertexes[1:],self.vertexes[0:1]))
         for i,self_search_vertex1 in enumerate(self.vertexes):
             self_search_vertex2=self_search_vertex2_list[i]
