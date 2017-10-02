@@ -19,7 +19,7 @@ class piece:
 		"""
         return numpy.allclose(self.vertexes,numpy.floor(self.vertexes))
 
-    def is_koverlapped(self,another,self_vertex1,self_vertex2,another_vertex1,another_vertex2):
+    def is_overlapped(self,another,self_vertex1,self_vertex2,another_vertex1,another_vertex2):
         """枠selfに対して結合した時にピースが重なるか判定します
 
         another: piece
