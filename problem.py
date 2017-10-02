@@ -6,6 +6,11 @@ class problem:
         print("kumataro TEST")
 
     def dfs_corner(self,frame):
+        """角の深さ優先探索を行います
+
+        frame: piece
+            フレーム
+        """
         pass
 		#結合可能なケースを探す
 		#if ケースが無い:
