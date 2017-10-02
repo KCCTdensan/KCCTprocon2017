@@ -14,6 +14,9 @@ class piece:
         print("角度 度",[numpy.rad2deg(i) for i in self.angles])
 
     def is_on_grid(self):
+        """
+		ピースの頂点がグリッド上に存在するかどうか判定します
+		"""
         return numpy.allclose(self.vertexes,numpy.floor(self.vertexes))
 
     def is_overlapped(self,another,self_vertex1,self_vertex2,another_vertex1,another_vertex2):
