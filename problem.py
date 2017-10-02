@@ -3,10 +3,10 @@ class problem:
         self.pieces = pieces
         self.frame = frame
 
-    def serach_360deg_corner(self):
+    def search_360deg_corner(self):
         print("kumataro TEST")
 
-    def serach_match_pieces(self):
+    def search_match_pieces(self):
         """枠にはまるピースを探索し、リストにまとめて返します。
         """
         pass
@@ -14,6 +14,7 @@ class problem:
     def ranking(self,pieces):
         """枠にはまるピースのリストを評価値順にソートします。
         
+
         pieces: 
             pieceのリスト
         """
@@ -23,7 +24,7 @@ class problem:
         """枠にはまるピースのリストを枠と結合し、リストにまとめて返します。
 
         pieces: 
-            pieceのリスト
+            pieceのリスト(frame)
         """
         pass
 
@@ -36,9 +37,7 @@ class problem:
             深さ
         """
 
-        pieces=serach_match_pieces()#結合可能なピースを探す
-        pieces=ranking(pieces)#評価値順にソート
-        frames=marge_pieces(pieces)#評価値順にソート
+        match_frames=marge_pieces(ranking(search_match_pieces()))#結合可能なピースを評価値順にソートし、枠と結合する
 		#if 結合可能なピースが無い:
 		#	if パズル完成:
         #       GUI更新
