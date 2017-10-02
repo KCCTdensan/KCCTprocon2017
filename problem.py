@@ -7,11 +7,11 @@ class problem:
         print("kumataro TEST")
 
     def search_match_pieces(self):
-        """枠にはまるピースを探索し、リストにまとめて返します。
+        """枠にはまるピースを探索し、評価値をつけ、リストにまとめて返します。
         """
         pass
 
-    def ranking(self,pieces):
+    def sorting(self,pieces):
         """枠にはまるピースのリストを評価値順にソートします。
         
 
@@ -37,7 +37,7 @@ class problem:
             深さ
         """
 
-        match_frames=marge_pieces(ranking(search_match_pieces()))#結合可能なピースを評価値順にソートし、枠と結合する
+        match_frames=marge_pieces(sorting(search_match_pieces()))#結合可能なピースを評価値順にソートし、枠と結合する
 		#if 結合可能なピースが無い:
 		#	if パズル完成:
         #       GUI更新
