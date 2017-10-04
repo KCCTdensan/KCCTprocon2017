@@ -41,8 +41,42 @@ class piece:
                 return True
         return False
 
-    def merge(self):
-        print("Yuelia35 Test")
+    def merge(self,another,self_vertex1,self_vertex2,another_vertex1,another_vertex2):
+        dx = self.vertexes[self_vertex1,0] - another.vertexes[another_vertex1,0]
+        dy = self.vertexes[self_vertex1,1] - another.vertexes[another_vertex1,1]
+        for i in another.vertexes:
+            another.vertexes[0] += dx
+            another.vertexes[1] += dy
+        Cwiseself = self_vertex1 + 1
+        CwiseA = another_vertex1 + 1
+        if Cwiseself >= len(self):
+            Cwiseself = 0
+        if CwiseA >= len(another):
+            CwiseA = 0
+        samelistC = []
+        while self.vertexes[Cwiseself] == another.vertexes[CwiseA]:
+            samelistC.append([Cwiseself,CwiseA])
+            Cwiseself += 1
+            CwiseA += 1
+            if Cwiseself >= len(self):
+                Cwiseself = 0
+            if CwiseA >= len(another):
+                CwiseA = 0
+        aCwiseself = self_vertex1 - 1
+        aCwiseA = another_vertex1 - 1
+        if aCwiseself < 0:
+            aCwiseself = len(self) -1
+        if aCwiseA < 0:
+            aCwiseA = len(another) -1
+        samelistaC = []
+        while self.vertexes[aCwiseself] == another.vertexes[aCwiseA]:
+            samelistaC.append([aCwiseself,aCwiseA])
+            aCwiseself -= 1
+            aCwiseA -= 1
+            if aCwiseself < 0:
+                aCwiseself = len(self) -1
+            if aCwiseA < 0:
+                aCwiseA = len(another) -1
 
     def rotate(self):
         print("PaperyKettleAsata TEST")
