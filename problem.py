@@ -3,27 +3,31 @@ class problem:
         self.pieces = pieces
         self.frame = frame
 
-    def search_360deg_corner(self):
-        print("kumataro TEST")
-
     def search_match_pieces(self):
         """枠にはまるピースを探索し、評価値をつけ、リストにまとめて返します。
+        
+        戻り値:
+            pieceと評価値のリスト
         """
         pass
 
     def sorting(self,pieces):
-        """枠にはまるピースのリストを評価値順にソートします。
+        """枠にはまるピースのリストを評価値順に降順にソートします。
         
 
         pieces: 
+            pieceと評価値のタプルのリスト
+        戻り値:
             pieceのリスト
         """
-        pass
+        return [piece for (piece, value) in sorted(pieses, key = lambda t: t[1], reverse = True)]
 
     def marge_pieces(self,pieces):
-        """枠にはまるピースのリストを枠と結合し、リストにまとめて返します。
+        """枠にはまるピースのリストを枠と結合し、リストにまとめて返します(frame)。
 
         pieces: 
+            pieceのリスト
+        戻り値:
             pieceのリスト(frame)
         """
         pass
@@ -35,6 +39,7 @@ class problem:
             フレーム
         depth:
             深さ
+        戻り値: bool
         """
 
         match_frames=marge_pieces(sorting(search_match_pieces()))#結合可能なピースを評価値順にソートし、枠と結合する
