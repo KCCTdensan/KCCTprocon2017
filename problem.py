@@ -8,4 +8,4 @@ class problem:
                 pass
 
         def calc_eval_value(self,piece_vertexes):
-                return len(set(map(tuple(self.frame)))&map(tuple(piece_vertexes)))
+                return len(set(map(tuple,self.frame.vertexes))&set(map(tuple,piece_vertexes)))
