@@ -12,15 +12,15 @@ class problem:
         pass
 
     def sorting(self,pieces):
-        """枠にはまるピースのリストを評価値順にソートします。
+        """枠にはまるピースのリストを評価値順に降順にソートします。
         
 
         pieces: 
-            pieceと評価値のリスト
+            pieceと評価値のタプルのリスト
         戻り値:
             pieceのリスト
         """
-        pass
+        return [piece for (piece, value) in sorted(pieses, key = lambda t: t[1], reverse = True)]
 
     def marge_pieces(self,pieces):
         """枠にはまるピースのリストを枠と結合し、リストにまとめて返します(frame)。
