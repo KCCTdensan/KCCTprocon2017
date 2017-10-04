@@ -24,7 +24,9 @@ class problem:
         [(pieceオブジェクト0,評価値0),(pieceオブジェクト1,評価値1),...,(pieceオブジェクトn,評価値n)]
         なおリストはソートされません。
         """
-        pass
+        ret=[]
+        #...
+        return ret
 
     def sorting(self,pieces):
         """枠にはまるピースのリストを評価値順にソートします。
