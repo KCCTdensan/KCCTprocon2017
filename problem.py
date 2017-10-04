@@ -1,5 +1,3 @@
-import numpy as np
-
 class problem:
         def __init__(self,pieces,frame):
                 self.pieces=pieces
@@ -8,8 +6,7 @@ class problem:
                 pass
 
         def calc_eval_value(self,piece_vertexes):
-                """
-                結合するピースの位置に対する評価値を返します。
+                """ 結合するピースの位置に対する評価値を返します。
 
                 piece_vertexes:
                    ピースの各頂点の座標の配列
