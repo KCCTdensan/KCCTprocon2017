@@ -51,7 +51,7 @@ class piece:
         another_vertex1:
             結合する枠の頂点
         """
-        pass
+        moved_self_piece_vertexes = self.vertexes - (self.vertexes[self_vertex] - another.vertexes[another_vertex])
 
     def rotate(self):
         print("PaperyKettleAsata TEST")
