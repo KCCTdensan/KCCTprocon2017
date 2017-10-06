@@ -41,6 +41,19 @@ class piece:
     def merge(self):
         print("Yuelia35 Test")
 
+    def move(self,another,self_vertex,another_vertex):
+        """枠(self)の頂点に合うようにピース(another)を平行移動
+
+        another: piece
+            ピース
+        self_vertex1:
+            結合する枠の頂点
+        another_vertex1:
+            結合するピースの頂点
+        戻り値
+        """
+        pass
+
     def rotate(self):
         print("PaperyKettleAsata TEST")
 
