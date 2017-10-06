@@ -64,16 +64,16 @@ class problem:
         """
 
         match_frames=merge_pieces(sorting(search_match_pieces()))#結合可能なピースを評価値順にソートし、枠と結合する
-		#if 結合可能なピースが無い:
+		#if len(match_frames)==0: 結合可能なピースが無い
 		#	if パズル完成:
-        #       GUI更新
+        	#       	GUI更新
 		#		return true
 		#	else
-        #       if depth > depth_max
-        #           GUI更新
+        	#       if depth > depth_max:
+        	#           	GUI更新
 		#		return false
-		#for i in flames
-		#	if dfs(self,frame,depth+1)=true
+		#for i in match_frames
+		#	if dfs(self,match_frames[i],depth+1)=true
 		#		return true;
 		#return false
 
