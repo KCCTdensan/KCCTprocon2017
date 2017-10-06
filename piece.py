@@ -41,42 +41,91 @@ class piece:
                 return True
         return False
 
-    def merge(self,another,self_vertex1,self_vertex2,another_vertex1,another_vertex2):
+    def merge(self,another,self_vertex1,another_vertex1):
         dx = self.vertexes[self_vertex1,0] - another.vertexes[another_vertex1,0]
         dy = self.vertexes[self_vertex1,1] - another.vertexes[another_vertex1,1]
         for i in another.vertexes:
             another.vertexes[0] += dx
             another.vertexes[1] += dy
+        #以下Cwiseはself視点
         Cwiseself = self_vertex1 + 1
-        CwiseA = another_vertex1 + 1
-        if Cwiseself >= len(self):
+        CwiseA = another_vertex1 - 1
+        if Cwiseself >= self.vertexes.shape[0]:
             Cwiseself = 0
-        if CwiseA >= len(another):
-            CwiseA = 0
-        samelistC = []
-        while self.vertexes[Cwiseself] == another.vertexes[CwiseA]:
-            samelistC.append([Cwiseself,CwiseA])
+        if CwiseA < 0:
+            CwiseA = another.vertexes.shape[0] -1
+        samelistS = []
+        samelistA = []
+        while (self.vertexes[Cwiseself] == another.vertexes[CwiseA]).all():
+            samelistS.append(Cwiseself)
+            samelistA.append(CwiseA)
             Cwiseself += 1
-            CwiseA += 1
-            if Cwiseself >= len(self):
+            CwiseA -= 1
+            if Cwiseself >= self.vertexes.shape[0]:
                 Cwiseself = 0
-            if CwiseA >= len(another):
-                CwiseA = 0
+            if CwiseA < 0:
+                CwiseA = another.vertexes.shape[0] - 1
         aCwiseself = self_vertex1 - 1
-        aCwiseA = another_vertex1 - 1
+        aCwiseA = another_vertex1 + 1
         if aCwiseself < 0:
-            aCwiseself = len(self) -1
-        if aCwiseA < 0:
-            aCwiseA = len(another) -1
-        samelistaC = []
-        while self.vertexes[aCwiseself] == another.vertexes[aCwiseA]:
-            samelistaC.append([aCwiseself,aCwiseA])
+            aCwiseself = self.vertexes.shape[0] -1
+        if aCwiseA >= another.vertexes.shape[0]:
+            aCwiseA = 0
+        while (self.vertexes[aCwiseself] == another.vertexes[aCwiseA]).all():
+            samelistS.append(aCwiseself)
+            samelistA.append(aCwiseA)
             aCwiseself -= 1
-            aCwiseA -= 1
+            aCwiseA += 1
             if aCwiseself < 0:
-                aCwiseself = len(self) -1
-            if aCwiseA < 0:
-                aCwiseA = len(another) -1
+                aCwiseself = self.vertexes.shape[0] -1
+            if aCwiseA >= another.vertexes.shape[0]:
+                aCwiseA = 0
+        samelistS.append(self_vertex1)
+        samelistA.append(another_vertex1)
+        bond = []
+        SA = 0
+        num = 0
+        while True:
+            if SA == 0:
+                if num in samelistS:
+                    if (self.angles[num] + another.angles[samelistA[samelistS.index(num)]] == 360) or (self.angles[num] + another.angles[samelistA[samelistS.index(num)]] == 180):
+                        num = samelistA[samelistS.index(num)] + 1
+                        SA = 1
+                        if num >= another.vertexes.shape[0]:
+                            num = 0
+                    else:
+                        bond.append(self.vertexes[num])
+                        num = samelistA[samelistS.index(num)] + 1
+                        SA = 1
+                        if num >= another.vertexes.shape[0]:
+                            num = 0
+                else:
+                    bond.append(self.vertexes[num])
+                    num += 1
+                    if num >= self.vertexes.shape[0]:
+                        num = 0
+            else:
+                if num in samelistA:
+                    if (another.angles[num] + self.angles[samelistS[samelistA.index(num)]] == 360) or (another.angles[num] + self.angles[samelistS[samelistA.index(num)]] == 180):
+                        num = samelistS[samelistA.index(num)] + 1
+                        SA = 0
+                        if num >= self.vertexes.shape[0]:
+                            num = 0
+                    else:
+                        bond.append(another.vertexes[num])
+                        num = samelistS[samelistA.index(num)] + 1
+                        SA = 0
+                        if num >= self.vertexes.shape[0]:
+                            num = 0
+                else:
+                    bond.append(another.vertexes[num])
+                    num += 1
+                    if num >= another.vertexes.shape[0]:
+                        num = 0
+            if (SA == 0) and (num == 0):
+                break
+            
+        return piece(numpy.array(bond))
 
     def rotate(self):
         print("PaperyKettleAsata TEST")
