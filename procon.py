@@ -1,6 +1,7 @@
 import re
 import math
 import numpy
+import threading
 
 import GUI
 import problem
@@ -22,7 +23,14 @@ TEST_next_problem.merge_history=[(root_problem,root_problem.pieces[0],0,1,0,1),(
 
 gui=GUI.GUI(root_problem)
 
-#GUIデバッグ
-#gui.draw_history(TEST_next_problem)
+def search():
+    #TODO:探索処理はここに
+    pass
+searching_thread=threading.Thread(target=search) 
+searching_thread.start()
 
+#GUIデバッグ
+gui.draw_history(TEST_next_problem)
+
+gui.root.mainloop()
 depth_max=0

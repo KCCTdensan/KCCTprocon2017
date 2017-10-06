@@ -1,8 +1,7 @@
 import tkinter
 import numpy
-import threading
 
-class GUI(threading.Thread):
+class GUI():
     def draw_history(self,problem):
         """
         ピース結合の履歴(手順)を描画します．
@@ -34,18 +33,14 @@ class GUI(threading.Thread):
         self.draw_piece(self.problem.frame,zoom,5,50*zoom)
 
     def __init__(self,problem):
-        threading.Thread.__init__(self)
         self.problem = problem
-
         self.root = tkinter.Tk()
-        self.root.protocol("WM_DELETE_WINDOW", lambda :self.root.quit())
 
         self.zoom_scale = tkinter.Scale(self.root, label = '倍率', orient = 'h',
                from_ = 2, to = 20, command = self.draw,resolution=0.1)
         self.canvas = tkinter.Canvas(self.root, scrollregion=("0", "0",  "10000",  "0"),width = 1000, height = 500)
         self.canvas_scrollbar = tkinter.Scrollbar(self.root, orient = 'h', command = self.canvas.xview)
         self.canvas.configure(xscrollcommand = self.canvas_scrollbar.set)
-        
         self.history_depth = tkinter.Scale(self.root, label = '履歴', orient = 'h',
                from_ = 0, to = 0, command = self.draw_history)
 
@@ -54,10 +49,4 @@ class GUI(threading.Thread):
         self.canvas.pack(fill="both")
         self.canvas_scrollbar.pack(fill="x",side="bottom")
 
-        self.start()
-
-    def run(self):
-
         self.draw(2)
-
-        self.root.mainloop()
