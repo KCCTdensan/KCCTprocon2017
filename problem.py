@@ -24,8 +24,10 @@ class problem:
         [(pieceオブジェクト0,評価値0),(pieceオブジェクト1,評価値1),...,(pieceオブジェクトn,評価値n)]
         なおリストはソートされません。
         """
+        enable_pieces=[] #枠と結合可能なピースを探索し、ここに格納
         ret=[]
-        #...
+        for i in enable_pieces:
+            ret.append((enable_pieces[i],calc_eval_value(enable_pieces[i].vertexes)))
         return ret
 
     def sorting(self,pieces):
