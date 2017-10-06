@@ -47,5 +47,3 @@ class GUI():
         self.canvas_scrollbar.pack(fill="x",side="bottom")
 
         self.draw(2)
-
-        self.root.mainloop()

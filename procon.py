@@ -1,6 +1,7 @@
 import re
 import math
 import numpy
+import threading
 
 import GUI
 import problem
@@ -14,4 +15,12 @@ import problem
 import QR
 root_problem=problem.problem(*QR.read_QR())
 gui=GUI.GUI(root_problem)
+
+def search():
+    #TODO:探索処理はここに
+    pass
+searching_thread=threading.Thread(target=search) 
+searching_thread.start()
+
+gui.root.mainloop()
 depth_max=0
