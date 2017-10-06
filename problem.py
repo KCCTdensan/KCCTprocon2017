@@ -35,9 +35,9 @@ class problem:
         pieces: 
             pieceと評価値のタプルのリスト
         戻り値:
-            pieceのリスト
+            pieceと評価値のタプルのリスト
         """
-        return [piece for (piece, value) in sorted(pieses, key = lambda t: t[1], reverse = True)]
+        return [sorted(pieses, key = lambda t: t[1], reverse = True)]
 
     def merge_pieces(self,pieces):
         """枠にはまるピースのリストを枠と結合し、リストにまとめて返します(frame)。
