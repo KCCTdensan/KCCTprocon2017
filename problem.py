@@ -12,6 +12,16 @@ class problem:
         評価値は、枠の各頂点の座標とピースの各頂点の座標が重複する数で表されます。
         各頂点の座標は枠に対して正確な位置である必要があります。
         """
+        return calc_num_of_match_vertexes(piece_vertexes)
+
+    def calc_num_of_match_vertexes(self,piece_vertexes):
+        """枠の各頂点の座標とピースの各頂点の座標が重複する数を返します。
+
+        piece_vertexes:
+            ピースの各頂点の座標の配列
+
+        各頂点の座標は枠に対して正確な位置である必要があります。
+        """
         return len(set(map(tuple,self.frame.vertexes))&set(map(tuple,piece_vertexes)))
 
     def search_match_pieces(self):
