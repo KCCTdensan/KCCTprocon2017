@@ -83,7 +83,7 @@ class problem:
         """
         frames=[]
         for P in pieces:
-            frames += [frame[0].merge(P[0],P[2],p[4]),P[1],frame[1].append((P[0],P[2],P[3],P[4],P[5]))]
+            frames += [frame[0].merge(P[0],P[2],p[4]),P[1],frame[1].append((frame[0],P[0],P[2],P[3],P[4],P[5]))]
         return frames
 
     def dfs_corner(self,frames,history,depth):
@@ -92,7 +92,7 @@ class problem:
         frames: piece
             フレームと結合履歴のタプルのリスト
         history:
-            結合履歴
+            前のノードの結合履歴
         depth:
             深さ
         戻り値: bool
