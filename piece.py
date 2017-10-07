@@ -10,8 +10,8 @@ class piece:
             vec_back = vertexes[(i - 1 + len(vertexes)) % len(vertexes)] - vertex
             inner_product = numpy.dot(vec_front,vec_back)
             angle = math.acos(inner_product / (numpy.linalg.norm(vec_front) * numpy.linalg.norm(vec_back)))
-            if cross(vertexes,vertex,vec_front + vec_back) == False:
-                angle = 360 - angle
+            if is_cross(vertexes,vertex,vec_front + vec_back) == False:
+                angle = 2 * math.pi - angle
             self.angles.append(angle)
         print("角度 度",[numpy.rad2deg(i) for i in self.angles])
 
@@ -53,14 +53,14 @@ class piece:
         self.vertexes[:,0]*=-1
         self.vertexes[:,0]-=min(self.vertexes[:,0])
 
-    def cross(self,vertexes,origin,vec_sum):
-        self.vertexes = vertexes
-        self.check = False
+    def is_cross(self,vertexes,origin,vec_sum):
+        count = 0
         for i,vertex in enumerate(vertexes):
             vertexes[i]=vertexes[i]-origin
-        vec_sum = vec_sum*10
+        vec_sum = vec_sum*100
         for i,vertex in enumerate(vertexes):
             vertex_2=vertexes[(i + 1) % len(vertexes)]
+            vertex_3=vertexes[(i + 2) % len(vertexes)]
             bx=vec_sum[0]
             by=vec_sum[1]
             cx=vertex[0]
@@ -71,5 +71,26 @@ class piece:
             tb = (cx - dx) * (by - cy) + (cy - dy) * (cx - bx)
             tc = (-bx) * cy + by * cx
             td = (-bx) * dy + (-by) * ax
-            self.check = (tc * td < 0) and (ta * tb < 0)
-        return self.check
+            """通常交差"""
+            if (tc * td < 0) and (ta * tb < 0):
+                count+=1
+            #頂点パターン1-3
+            if (td == 0):
+                #交差パターン3
+                if(ta == 0 and tb == 0 and tc == 0 and td == 0):
+                    count = count
+                #交差パターン2
+                elif(is_cross_2(0,0,vec_sum[0],vec_sum[1],vertex[0],vertex[1],vertex_3[0],vertex_3[1])):
+                    count = count
+                #交差パターン1
+                else:
+                    count +=1
+        return count % 2 == 0
+
+    def is_cross_2(self,ax,ay,bx,by,cx,cy,dx,dy):
+        ta = (cx - dx) * (ay - cy) + (cy - dy) * (cx - ax)
+        tb = (cx - dx) * (by - cy) + (cy - dy) * (cx - bx)
+        tc = (ax - bx) * (cy - ay) + (ay - by) * (ax - cx)
+        td = (ax - bx) * (dy - ay) + (ay - by) * (ax - dx)
+
+        return (tc * td < 0) and (ta * tb < 0)
