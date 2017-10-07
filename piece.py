@@ -10,7 +10,7 @@ class piece:
             vec_back = vertexes[(i - 1 + len(vertexes)) % len(vertexes)] - vertex
             inner_product = numpy.dot(vec_front,vec_back)
             angle = math.acos(inner_product / (numpy.linalg.norm(vec_front) * numpy.linalg.norm(vec_back)))
-            if is_cross(vertexes,vertex,vec_front + vec_back) == False:
+            if self.is_cross(vertexes,vertex,vec_front + vec_back) == False:
                 angle = 2 * math.pi - angle
             self.angles.append(angle)
         print("角度 度",[numpy.rad2deg(i) for i in self.angles])
@@ -218,7 +218,7 @@ class piece:
         #ベクトルの内積をもとめる！・・・は説明変数無しに1行にまとめる!
         #ベクトルの大きさをもとめる！・・・も説明変数無しに1行にまとめる!
         #θをもとめる！
-        rotate_angle = math.acos(numpy.dot(vecter_self,vecter_another); / (numpy.linalg.norm(vecter_self) * numpy.linalg.norm(vecter_another)))
+        rotate_angle = math.acos(numpy.dot(vecter_self,vecter_another) / (numpy.linalg.norm(vecter_self) * numpy.linalg.norm(vecter_another)))
 
         #回転行列をもとめる！
         rotate_matrix = numpy.matrix([
