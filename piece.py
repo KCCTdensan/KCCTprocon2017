@@ -47,7 +47,7 @@ class piece:
         """
         anotherピースを移動させる
         selfとanotherのvertex1が重なりかつ指定する4つの頂点が一直線上になるように移動する
-        ただし現在4つの頂点を一直線上にできるような回転を実装できてないので事前に回転する必要がある
+        回転がうまく行けば多分これもうまくいく
 
         anotherD:piece
             ピース
@@ -62,6 +62,8 @@ class piece:
         """
         #変数の書き換えを防ぐ
         another = anotherD
+        #回転
+        another = another.rotate(self,another_vertex1,another_vertex2,self_vertex1,self_vertex2)
         #selfとanotherの差を取得
         dx = self.vertexes[self_vertex1,0] - another.vertexes[another_vertex1,0]
         dy = self.vertexes[self_vertex1,1] - another.vertexes[another_vertex1,1]
@@ -74,7 +76,7 @@ class piece:
         """
         selfのピースとanotherのピースを結合
         selfとanotherのvertex1が重なりかつ指定する4つの頂点が一直線上になるように結合する
-        ただし現在4つの頂点を一直線上にできるような回転を実装できてないので事前に回転する必要がある
+        回転がうまく行けばこれもうまく行ける
 
         anotherD:piece
             ピース
