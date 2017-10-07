@@ -38,7 +38,7 @@ class problem:
         """枠にはまるピースを探索し、評価値をつけ、リストにまとめて返します。
 
         frame:
-            枠
+            フレームと結合履歴のタプル
         戻り値:
             piece,評価値,フレームの頂点1,フレームの頂点2,ピースの頂点1,ピースの頂点2のタプルのリスト
 
@@ -48,11 +48,11 @@ class problem:
         """
         enable_pieces=[] #枠と結合可能なピース,結合する枠の頂点,結合するピースの頂点のタプルをここに格納
         for piece in self.pieces: #全てのピースをみる
-            for frame_vertex in frame.vertexes: #フレームの頂点全てをみる
+            for frame_vertex in frame[0].vertexes: #フレームの頂点全てをみる
                 for piece_vertex in piece.vertexes: #1ピースの頂点全てをみる
 
                     #回転→is_overlapped()→merge()→is_on_grid()     結合判定
-                    #     ↑←frip()←←←↓                          結合判定
+                    #     ↑←frip()←←←↓                          結合判定 piece内で関数作るべき？
 
                     enable_pieces.append((piece,frame_vertex1,frame_vertex2,piece_vertex1,piece_vertex2))
 
@@ -72,47 +72,48 @@ class problem:
         """
         return sorted(pieces, key = lambda t: t[1], reverse = True)
 
-    def merge_pieces(self,pieces):
+    def merge_pieces(self,frame,pieces):
         """枠にはまるピースのリストを枠と結合し、リストにまとめて返します(frame)。
-
+        frame:
+            piece,結合履歴のタプル
         pieces: 
             piece,評価値,フレームの頂点1,フレームの頂点2,ピースの頂点1,ピースの頂点2のタプルのリスト
         戻り値:
-            pieceと評価値のタプルのリスト(frame)
+            piece,評価値,結合履歴のタプルのリスト(frame)
         """
         frames=[]
         for P in pieces:
-            frames += [self.frame.merge(P[0],P[2],p[3]),P[1]]
-            merge_history += (P[0],P[2],P[3],P[4],P[5]) #結合手順の記録
+            frames += [frame[0].merge(P[0],P[2],p[4]),P[1],frame[1].append((P[0],P[2],P[3],P[4],P[5]))]
         return frames
 
-    def dfs_corner(self,frames,depth):
+    def dfs_corner(self,frames,history,depth):
         """角の深さ優先探索を行います
 
         frames: piece
-            評価値が同じフレームのリスト
+            フレームと結合履歴のタプルのリスト
+        history:
+            結合履歴
         depth:
             深さ
         戻り値: bool
         """
 
         for frame in frames:
-            match_frames=merge_pieces(sorting(search_match_pieces(frame)))#結合可能なピースを評価値順にソートし、枠と結合する
-        
+            match_frames=merge_pieces(frame,sorting(search_match_pieces(frame)))
+            #結合可能なピースを評価値順にソートし、枠と結合する
         if len(match_frames)==0: #結合可能なピースが無い、行き止まり
-		#	if パズル完成:
-        #       GUI更新
-		#		return true
+            if depth==1000:#パズル完成(仮) 条件考える必要あり
+                self.merge_history=history
+                return true
             if depth > depth_max:
-        #       GUI更新
-                pass
+                self.merge_history=history
             return false
 
         #再帰部
         same_value_frames=[] #評価値が等しいframeを格納するリスト
         for i,match_frame in enumerate(match_frames): #結合後のframeを全て見る
             if match_frames[i][1]!=match_frames[i+1][1]: #評価値が等しいframeを格納し終えたとき
-                if dfs(same_value_frames,depth+1)==true: #それらを引数にして再帰
+                if dfs(same_value_frames,same_value_frames[0][1],depth+1)==true: #それらを引数にして再帰
                     return true
             else:
                 same_value_frames.append(match_frames[i]) #評価値が等しいframeを追加していく
