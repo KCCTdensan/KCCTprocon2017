@@ -2,6 +2,7 @@ class problem:
     def __init__(self,pieces,frame):
         self.pieces = pieces
         self.frame = frame
+        self.merge_history = []
 
     def calc_num_of_match_vertexes(self,piece_vertexes):
         """枠の各頂点の座標とピースの各頂点の座標が重複する数を返します。
