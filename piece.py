@@ -10,7 +10,7 @@ class piece:
             vec_back = vertexes[(i - 1 + len(vertexes)) % len(vertexes)] - vertex
             inner_product = numpy.dot(vec_front,vec_back)
             angle = math.acos(inner_product / (numpy.linalg.norm(vec_front) * numpy.linalg.norm(vec_back)))
-            if cross(vertexes,vertex,vec_front + vec_back) == False:
+            if self.cross(vertexes,vertex,vec_front + vec_back) == False:
                 angle = 360 - angle
             self.angles.append(angle)
         print("角度 度",[numpy.rad2deg(i) for i in self.angles])
