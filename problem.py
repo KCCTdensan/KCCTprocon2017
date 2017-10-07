@@ -39,7 +39,7 @@ class problem:
         frame:
             枠
         戻り値:
-            piece,評価値,フレームの頂点,ピースの頂点のタプルのリスト
+            piece,評価値,フレームの頂点1,フレームの頂点2,ピースの頂点1,ピースの頂点2のタプルのリスト
 
         戻り値は以下のようにpieceオブジェクトと評価値が含まれるタプルのリストになります。
         [(pieceオブジェクト0,評価値0),(pieceオブジェクト1,評価値1),...,(pieceオブジェクトn,評価値n)]
@@ -53,11 +53,11 @@ class problem:
                     #回転→is_overlapped()→merge()→is_on_grid()     結合判定
                     #     ↑←frip()←←←↓                          結合判定
 
-                    enable_pieces.append((piece,frame_vertex,piece_vertex))
+                    enable_pieces.append((piece,frame_vertex1,frame_vertex2,piece_vertex1,piece_vertex2))
 
         ret=[]
         for enable_piece in enable_pieces:
-            ret.append((enable_piece[0],calc_eval_value(enable_piece[0].vertexes),enable_piece[1],enable_piece[2]))
+            ret.append((enable_piece[0],calc_eval_value(enable_piece[0].vertexes),enable_piece[1],enable_piece[2],enable_piece[3],enable_piece[4]))
         return ret
 
     def sorting(self,pieces):
@@ -65,9 +65,9 @@ class problem:
         
 
         pieces: 
-            piece,評価値,フレームの頂点,ピースの頂点のタプルのリスト
+            piece,評価値,フレームの頂点1,フレームの頂点2,ピースの頂点1,ピースの頂点2のタプルのリスト
         戻り値:
-            piece,評価値,フレームの頂点,ピースの頂点のタプルのリスト
+            piece,評価値,フレームの頂点1,フレームの頂点2,ピースの頂点1,ピースの頂点2のタプルのリスト
         """
         return sorted(pieces, key = lambda t: t[1], reverse = True)
 
@@ -75,14 +75,14 @@ class problem:
         """枠にはまるピースのリストを枠と結合し、リストにまとめて返します(frame)。
 
         pieces: 
-            piece,評価値,フレームの頂点,ピースの頂点のタプルのリスト
+            piece,評価値,フレームの頂点1,フレームの頂点2,ピースの頂点1,ピースの頂点2のタプルのリスト
         戻り値:
             pieceと評価値のタプルのリスト(frame)
         """
         frames=[]
         for P in pieces:
             frames += [self.frame.merge(P[0],P[2],p[3]),P[1]]
-
+            merge_history += (P[0],P[2],P[3],P[4],P[5]) #結合手順の記録
         return frames
 
     def dfs_corner(self,frames,depth):
