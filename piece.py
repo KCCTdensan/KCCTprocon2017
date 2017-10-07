@@ -67,11 +67,13 @@ class piece:
             cy=vertex[1]
             dx=vertex_2[0]
             dy=vertex_2[1]
-            ta=(cx - dx) * (-cy) + (cy - dy) * cx
+            ax = 0
+            ay = 0
+            ta = (cx - dx) * (ay - cy) + (cy - dy) * (cx - ax)
             tb = (cx - dx) * (by - cy) + (cy - dy) * (cx - bx)
-            tc = (-bx) * cy + by * cx
-            td = (-bx) * dy + (-by) * ax
-            """通常交差"""
+            tc = (ax - bx) * (cy - ay) + (ay - by) * (ax - cx)
+            td = (ax - bx) * (dy - ay) + (ay - by) * (ax - dx)
+            #通常交差
             if (tc * td < 0) and (ta * tb < 0):
                 count+=1
             #頂点パターン1-3
