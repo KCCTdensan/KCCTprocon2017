@@ -14,20 +14,31 @@ class problem:
         """
         return len(set(map(tuple,self.frame.vertexes))&set(map(tuple,piece_vertexes)))
 
-    def search_match_pieces(self):
+    def search_match_pieces(self,frame):
         """枠にはまるピースを探索し、評価値をつけ、リストにまとめて返します。
-        
+
+        frame:
+            枠
         戻り値:
-            pieceと評価値のタプルのリスト
+            piece,評価値,フレームの頂点,ピースの頂点のタプルのリスト
 
         戻り値は以下のようにpieceオブジェクトと評価値が含まれるタプルのリストになります。
         [(pieceオブジェクト0,評価値0),(pieceオブジェクト1,評価値1),...,(pieceオブジェクトn,評価値n)]
         なおリストはソートされません。
         """
-        enable_pieces=[] #枠と結合可能なピースを探索し、ここに格納
+        enable_pieces=[] #枠と結合可能なピース,結合する枠の頂点,結合するピースの頂点のタプルをここに格納
+        for piece in self.pieces: #全てのピースをみる
+            for frame_vertex in frame.vertexes: #フレームの頂点全てをみる
+                for piece_vertex in piece.vertexes: #1ピースの頂点全てをみる
+
+                    #回転→is_overlapped()→merge()→is_on_grid()     結合判定
+                    #     ↑←frip()←←←↓                          結合判定
+
+                    enable_pieces.append((piece,frame_vertex,piece_vertex))
+
         ret=[]
-        for i in enable_pieces:
-            ret.append((enable_pieces[i],calc_eval_value(enable_pieces[i].vertexes)))
+        for enable_piece in enable_pieces:
+            ret.append((enable_piece[0],calc_eval_value(enable_piece[0].vertexes),enable_piece[1],enable_piece[2]))
         return ret
 
     def sorting(self,pieces):
