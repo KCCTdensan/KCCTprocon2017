@@ -62,15 +62,15 @@ class problem:
         """枠にはまるピースのリストを枠と結合し、リストにまとめて返します(frame)。
 
         pieces: 
-            pieceのリスト
+            pieceの評価値とタプルのリスト
         戻り値:
-            pieceのリスト(frame)
+            pieceと評価値のタプルのリスト(frame)
         """
-        frame=[]
+        frames=[]
         for P in pieces:
-            frame +=[self.frame.merge(P)]
+            frames += [self.frame.merge(P[0]),P[1]]
 
-        return frame
+        return frames
 
     def dfs_corner(self,frames,depth):
         """角の深さ優先探索を行います
