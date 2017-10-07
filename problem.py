@@ -72,27 +72,35 @@ class problem:
 
         return frame
 
-    def dfs_corner(self,frame,depth):
+    def dfs_corner(self,frames,depth):
         """角の深さ優先探索を行います
 
-        frame: piece
-            フレーム
+        frames: piece
+            評価値が同じフレームのリスト
         depth:
             深さ
         戻り値: bool
         """
 
-        match_frames=merge_pieces(sorting(search_match_pieces()))#結合可能なピースを評価値順にソートし、枠と結合する
-		#if len(match_frames)==0: 結合可能なピースが無い
+        for i in frames:
+            match_frames=merge_pieces(sorting(search_match_pieces(frames[i])))#結合可能なピースを評価値順にソートし、枠と結合する
+        
+        if len(match_frames)==0: #結合可能なピースが無い、行き止まり
+            pass
 		#	if パズル完成:
-        	#       	GUI更新
+        #       GUI更新
 		#		return true
-		#	else
-        	#       if depth > depth_max:
-        	#           	GUI更新
-		#		return false
-		#for i in match_frames
-		#	if dfs(self,match_frames[i],depth+1)=true
-		#		return true;
+        #   if depth > depth_max:
+        #       GUI更新
+		#	return false
+
+        #再帰部
+        #same_value_frames=[] #評価値が等しいframeを格納するリスト
+		#for i in match_frames: #結合後のframeを全て見る
+        #   if match_frames[i][1]!=match_frames[i+1][1]: #評価値が等しいframeを格納し終えたとき
+        #       if dfs(same_value_frames,depth+1)==true #それらを引数にして再帰
+        #           return true
+        #   else:
+        #       same_value_frames.append(match_frames[i]) #評価値が等しいframeを追加していく
 		#return false
 
