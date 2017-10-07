@@ -238,12 +238,11 @@ class piece:
 
     def is_cross(self,vertexes,origin,vec_sum):
         count = 0
-        for i,vertex in enumerate(vertexes):
-            vertexes[i]=vertexes[i]-origin
+        vertexes_shifted=vertexes-origin
         vec_sum = vec_sum*100
-        for i,vertex in enumerate(vertexes):
-            vertex_2=vertexes[(i + 1) % len(vertexes)]
-            vertex_3=vertexes[(i + 2) % len(vertexes)]
+        for i,vertex in enumerate(vertexes_shifted):
+            vertex_2=vertexes_shifted[(i + 1) % len(vertexes_shifted)]
+            vertex_3=vertexes_shifted[(i + 2) % len(vertexes_shifted)]
             bx=vec_sum[0]
             by=vec_sum[1]
             cx=vertex[0]
