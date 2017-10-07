@@ -1,4 +1,5 @@
-import evaluation
+from evaluation import evaluation
+evaluation=evaluation()
 
 class problem:
     def __init__(self,pieces,frame):
