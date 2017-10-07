@@ -265,7 +265,7 @@ class piece:
                 if(ta == 0 and tb == 0 and tc == 0 and td == 0):
                     count = count
                 #交差パターン2
-                elif(is_cross_2(0,0,vec_sum[0],vec_sum[1],vertex[0],vertex[1],vertex_3[0],vertex_3[1])):
+                elif(self.is_cross_2(0,0,vec_sum[0],vec_sum[1],vertex[0],vertex[1],vertex_3[0],vertex_3[1])):
                     count = count
                 #交差パターン1
                 else:
