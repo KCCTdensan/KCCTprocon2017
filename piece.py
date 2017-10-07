@@ -192,16 +192,18 @@ class piece:
             #self[0]に戻ってきたら(新ピースに必要な頂点をすべて記録したら)break
             if (SA == 0) and (num == 0):
                 break
+        #角度がpiなど頂点としての体を成していない頂点を削除
         ret = piece(numpy.array(bond))
         invalid = []
         for i in range(ret.vertexes.shape[0]):
             print(ret.angles[i])
-            if (ret.angles[i] == math.pi) or (ret.angles[i] == math.pi * 2):
+            if (ret.angles[i] == math.pi) or (ret.angles[i] == math.pi * 2) or (ret.angles[i] == 0):
                 invalid.append(i)
         invalid.reverse()
         for i in invalid:
-            numpy.delete(ret.angles,i)
-            numpy.delete(ret.vertexes,i)
+            ret.angles = numpy.delete(ret.angles,i)
+            ret.vertexes = numpy.delete(ret.vertexes,i,0)
+        #お出口は後ろ側です(結合済みピースを返します)
         return ret
 
     def rotate(self):
