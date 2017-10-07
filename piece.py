@@ -63,7 +63,7 @@ class piece:
         #変数の書き換えを防ぐ
         another = anotherD
         #回転
-        another = another.rotate(self,another_vertex1,another_vertex2,self_vertex1,self_vertex2)
+        another = another.rotate(self,self_vertex1,self_vertex2,another_vertex1,another_vertex2)
         #selfとanotherの差を取得
         dx = self.vertexes[self_vertex1,0] - another.vertexes[another_vertex1,0]
         dy = self.vertexes[self_vertex1,1] - another.vertexes[another_vertex1,1]

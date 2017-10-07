@@ -55,13 +55,17 @@ class problem:
         frame:
             piece,結合履歴のタプル
         pieces: 
+            0     1      2               3               4           5
             piece,評価値,フレームの頂点1,フレームの頂点2,ピースの頂点1,ピースの頂点2のタプルのリスト
         戻り値:
             piece,評価値,結合履歴のタプルのリスト(frame)
         """
+
+        #TODO:これだけややこしいならnamedtupleの方がいいかもね
+
         frames=[]
         for P in pieces:
-            frames += [frame[0].merge(P[0],P[2],P[4]),P[1],frame[1].append((frame[0],P[0],P[2],P[3],P[4],P[5]))]
+            frames += [frame[0].merge(P[0],P[2],P[3],P[4],P[5]),P[1],frame[1].append((frame[0],P[0],P[2],P[3],P[4],P[5]))]
         return frames
 
     def dfs_corner(self,frames,history,depth):
@@ -80,7 +84,7 @@ class problem:
             match_frames=self.merge_pieces(frame,self.sorting(self.search_match_pieces(frame)))
             #結合可能なピースを評価値順にソートし、枠と結合する
         if len(match_frames)==0: #結合可能なピースが無い、行き止まり
-            if depth==1000:#パズル完成(仮) 条件考える必要あり
+            if depth==1000:#パズル完成(仮) #FIXME:条件考える必要あり
                 self.merge_history=history
                 return true
             if depth > depth_max:
