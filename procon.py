@@ -16,6 +16,7 @@ import QR
 root_problem=problem.problem(*QR.read_QR())
 
 gui=GUI.GUI(root_problem)
+root_problem.gui_api=gui
 
 #GUIデバッグ
 #import copy

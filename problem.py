@@ -87,8 +87,9 @@ class problem:
             if depth==1000:#パズル完成(仮) #FIXME:条件考える必要あり
                 self.merge_history=history
                 return true
-            if depth > depth_max:
+            if depth > depth_max:#FIXME:おそらくdepth_maxアクセス出来ない
                 self.merge_history=history
+                self.gui_api.draw_history(self)
             return false
 
         #再帰部
