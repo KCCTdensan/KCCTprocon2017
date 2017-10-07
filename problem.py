@@ -21,13 +21,25 @@ class problem:
         evaluation=evaluation()
         enable_pieces=[] #枠と結合可能なピース,結合する枠の頂点,結合するピースの頂点のタプルをここに格納
         for piece in self.pieces: #全てのピースをみる
-            for frame_vertex in frame[0].vertexes: #フレームの頂点全てをみる
-                for piece_vertex in piece.vertexes: #1ピースの頂点全てをみる
+            for i,frame_vertex in enumerate(frame[0].vertexes): #フレームの頂点全てをみる
+                for j,piece_vertex in enumerate(piece.vertexes): #1ピースの頂点全てをみる
+
+                    frame_vertex1=frame[0].vertexes[i]
+                    piece_vertex1=piece.vertexes[j]
+                    if frame_vertex1==len(frame[0].vertexes):
+                        frame_vertex2=frame[0].vertexses[0]
+                    else:
+                        frame_vertex2=frame[0].vertexses[i+1]
+                    if piece_vertex1==len(piece.vertexes):
+                        piece_vertex2=piece.vertexses[0]
+                    else:
+                        piece_vertex2=frame[0].vertexses[j+1]
 
                     #回転→is_overlapped()→merge()→is_on_grid()     結合判定
                     #     ↑←frip()←←←↓                          結合判定 piece内で関数作るべき？
 
-                    enable_pieces.append((piece,frame_vertex1,frame_vertex2,piece_vertex1,piece_vertex2))
+                    enable_pieces.append((piece,frame_vertex1,frame_vertex2,piece_vertex1,piece_vertex2)) 
+                    enable_pieces.append((piece,frame_vertex1,frame_vertex2,piece_vertex2,piece_vertex1))#逆
 
         ret=[]
         for enable_piece in enable_pieces:
