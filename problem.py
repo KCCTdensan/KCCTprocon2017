@@ -82,25 +82,25 @@ class problem:
         戻り値: bool
         """
 
-        for i in frames:
-            match_frames=merge_pieces(sorting(search_match_pieces(frames[i])))#結合可能なピースを評価値順にソートし、枠と結合する
+        for frame in frames:
+            match_frames=merge_pieces(sorting(search_match_pieces(frame)))#結合可能なピースを評価値順にソートし、枠と結合する
         
         if len(match_frames)==0: #結合可能なピースが無い、行き止まり
-            pass
 		#	if パズル完成:
         #       GUI更新
 		#		return true
-        #   if depth > depth_max:
+            if depth > depth_max:
         #       GUI更新
-		#	return false
+                pass
+            return false
 
         #再帰部
-        #same_value_frames=[] #評価値が等しいframeを格納するリスト
-		#for i in match_frames: #結合後のframeを全て見る
-        #   if match_frames[i][1]!=match_frames[i+1][1]: #評価値が等しいframeを格納し終えたとき
-        #       if dfs(same_value_frames,depth+1)==true #それらを引数にして再帰
-        #           return true
-        #   else:
-        #       same_value_frames.append(match_frames[i]) #評価値が等しいframeを追加していく
-		#return false
+        same_value_frames=[] #評価値が等しいframeを格納するリスト
+        for i,match_frame in enumerate(match_frames): #結合後のframeを全て見る
+            if match_frames[i][1]!=match_frames[i+1][1]: #評価値が等しいframeを格納し終えたとき
+                if dfs(same_value_frames,depth+1)==true: #それらを引数にして再帰
+                    return true
+            else:
+                same_value_frames.append(match_frames[i]) #評価値が等しいframeを追加していく
+        return false
 
