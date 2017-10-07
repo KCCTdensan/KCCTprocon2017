@@ -7,9 +7,11 @@ class piece:
         self.angles = []
         for i,vertex in enumerate(vertexes):
             vec_front = vertexes[(i + 1) % len(vertexes)] - vertex
-            vec_back = vertex - vertexes[(i - 1 + len(vertexes)) % len(vertexes)]
+            vec_back = vertexes[(i - 1 + len(vertexes)) % len(vertexes)] - vertex
             inner_product = numpy.dot(vec_front,vec_back)
             angle = math.acos(inner_product / (numpy.linalg.norm(vec_front) * numpy.linalg.norm(vec_back)))
+            if cross(vertexes,vertex,vec_front + vec_back) == False:
+                angle = 360 - angle
             self.angles.append(angle)
         print("角度 度",[numpy.rad2deg(i) for i in self.angles])
 
@@ -212,3 +214,24 @@ class piece:
     def flip(self):
         self.vertexes[:,0]*=-1
         self.vertexes[:,0]-=min(self.vertexes[:,0])
+
+    def cross(self,vertexes,origin,vec_sum):
+        self.vertexes = vertexes
+        self.check = False
+        for i,vertex in enumerate(vertexes):
+            vertexes[i]=vertexes[i]-origin
+        vec_sum = vec_sum*10
+        for i,vertex in enumerate(vertexes):
+            vertex_2=vertexes[(i + 1) % len(vertexes)]
+            bx=vec_sum[0]
+            by=vec_sum[1]
+            cx=vertex[0]
+            cy=vertex[1]
+            dx=vertex_2[0]
+            dy=vertex_2[1]
+            ta=(cx - dx) * (-cy) + (cy - dy) * cx
+            tb = (cx - dx) * (by - cy) + (cy - dy) * (cx - bx)
+            tc = (-bx) * cy + by * cx
+            td = (-bx) * dy + (-by) * ax
+            self.check = (tc * td < 0) and (ta * tb < 0)
+        return self.check
