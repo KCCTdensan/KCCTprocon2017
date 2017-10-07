@@ -1,38 +1,10 @@
+import evaluation
+
 class problem:
     def __init__(self,pieces,frame):
         self.pieces = pieces
         self.frame = frame
         self.merge_history = []
-
-    def calc_num_of_match_vertexes(self,piece_vertexes):
-        """枠の各頂点の座標とピースの各頂点の座標が重複する数を返します。
-
-        piece_vertexes:
-            ピースの各頂点の座標の配列
-
-        各頂点の座標は枠に対して正確な位置である必要があります。
-        """
-        return len(set(map(tuple,self.frame.vertexes))&set(map(tuple,piece_vertexes)))
-
-    def calc_num_of_tangent_point(self,piece_vertexes):
-        """
-        """
-        vernum=len(piece_vertexes)
-        sides=[]
-        for i in piece_vertexes:
-            sides+=[[piece_vertexes[(i+1)%vernum][0]-piece_vertexes[i][0],piece_vertexes[(i+1)%vernum][0]-piece_vertexes[i][0]]]
-
-
-    def calc_eval_value(self,piece_vertexes):
-        """結合するピースの位置に対する評価値を返します。
-
-        piece_vertexes:
-            ピースの各頂点の座標の配列
-
-        評価値は、枠の各頂点の座標とピースの各頂点の座標が重複する数で表されます。
-        各頂点の座標は枠に対して正確な位置である必要があります。
-        """
-        return calc_num_of_match_vertexes(piece_vertexes)
 
     def search_match_pieces(self,frame):
         """枠にはまるピースを探索し、評価値をつけ、リストにまとめて返します。
@@ -46,6 +18,7 @@ class problem:
         [(pieceオブジェクト0,評価値0),(pieceオブジェクト1,評価値1),...,(pieceオブジェクトn,評価値n)]
         なおリストはソートされません。
         """
+        evaluation=evaluation()
         enable_pieces=[] #枠と結合可能なピース,結合する枠の頂点,結合するピースの頂点のタプルをここに格納
         for piece in self.pieces: #全てのピースをみる
             for frame_vertex in frame[0].vertexes: #フレームの頂点全てをみる
@@ -58,7 +31,7 @@ class problem:
 
         ret=[]
         for enable_piece in enable_pieces:
-            ret.append((enable_piece[0],calc_eval_value(enable_piece[0].vertexes),enable_piece[1],enable_piece[2],enable_piece[3],enable_piece[4]))
+            ret.append((enable_piece[0],evaluation.calc_eval_value(frame[0],enable_piece[0].vertexes),enable_piece[1],enable_piece[2],enable_piece[3],enable_piece[4]))
         return ret
 
     def sorting(self,pieces):
