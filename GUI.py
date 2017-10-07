@@ -8,11 +8,14 @@ class GUI():
 
         problem: problem
         """
+        if len(problem.merge_history)<=0:
+            return
         self.problem=problem #TODO:問題になるかも
+        self.draw()
         zoom=self.zoom_scale.get()
         self.history_depth.configure(to=len(problem.merge_history)-1)
-        self.draw_piece(problem.merge_history[self.history_depth.get()][0].frame,zoom,5,50*zoom)
-        self.draw_piece(problem.merge_history[self.history_depth.get()][1],zoom,200,50*zoom)
+        self.draw_piece(problem.merge_history[self.history_depth.get()][0],zoom,5,150*zoom)
+        self.draw_piece(problem.merge_history[self.history_depth.get()][1],zoom,200,150*zoom)
 
     def draw_piece(self,piece,zoom,x,y):
         self.canvas.create_polygon([[(p[0] + x) * zoom,p[1] * zoom+y] for p in piece.vertexes],fill="",outline="black")
@@ -31,13 +34,13 @@ class GUI():
             self.draw_piece(piece,zoom,x,10)
             x+=numpy.amax(piece.vertexes,axis=0)[0] + 1
         self.draw_piece(self.problem.frame,zoom,5,50*zoom)
-        self.draw_history(self.problem)
 
     def draw_handler(self,arg):
         """
         GUIの為のハンドラです．
         """
         self.draw()
+        self.draw_history(self.problem)
 
     def __init__(self,problem):
         self.problem = problem

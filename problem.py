@@ -2,6 +2,7 @@ class problem:
     def __init__(self,pieces,frame):
         self.pieces = pieces
         self.frame = frame
+        self.merge_history = []
 
     def search_match_pieces(self):
         """枠にはまるピースを探索し、評価値をつけ、リストにまとめて返します。
