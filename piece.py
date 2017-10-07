@@ -208,8 +208,34 @@ class piece:
         #お出口は後ろ側です(結合済みピースを返します)
         return ret
 
-    def rotate(self):
-        print("PaperyKettleAsata TEST")
+    def rotate(self,another,self_vertex1,self_vertex2,another_vertex1,another_vertex2):
+
+        shifted_another_piece_vertexes=another.vertexes-(another.vertexes[another_vertex1]-self.vertexes[self_vertex1])
+
+        #辺のベクトルをもとめる！
+        vecter_self = self.vertexes[self_vertex2]-self.vertexes[self_vertex1];
+        vecter_another = another.vertexes[another_vertex2]-another.vertexes[another_vertex1];
+
+        #ベクトルの内積をもとめる！
+        inner_product = numpy.dot(vecter_self,vecter_another);
+
+        #ベクトルの大きさをもとめる！
+        length_vecter_self = numpy.linalg.norm(vecter_self);
+        length_vecter_another = numpy.linalg.norm(vecter_another);
+
+        #θをもとめる！
+        cos_theta_vecters = inner_product/length_vecter_self*length_vecter_another;
+        sin_theta_vecters = 1-(cos_theta_vecters*cos_theta_vecters);
+
+        #回転行列で回転後の座標をもとめる！
+        rotate_matrix = numpy.matrix([
+            [cos_theta_vecters , -sin_theta_vecters],
+            [sin_theta_vecters , cos_theta_vecters]
+            ])
+
+        rotated_another_vertexes = rotate_matrix*another.vertexes[another_vertex1];
+
+        
 
     def flip(self):
         self.vertexes[:,0]*=-1
