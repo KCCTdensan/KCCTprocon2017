@@ -18,7 +18,6 @@ class problem:
         [(pieceオブジェクト0,評価値0),(pieceオブジェクト1,評価値1),...,(pieceオブジェクトn,評価値n)]
         なおリストはソートされません。
         """
-        evaluation=evaluation()
         enable_pieces=[] #枠と結合可能なピース,結合する枠の頂点,結合するピースの頂点のタプルをここに格納
         for piece in self.pieces: #全てのピースをみる
             for i,frame_vertex in enumerate(frame[0].vertexes): #フレームの頂点全てをみる
@@ -84,7 +83,7 @@ class problem:
         """
 
         for frame in frames:
-            match_frames=merge_pieces(frame,sorting(search_match_pieces(frame)))
+            match_frames=self.merge_pieces(frame,self.sorting(self.search_match_pieces(frame)))
             #結合可能なピースを評価値順にソートし、枠と結合する
         if len(match_frames)==0: #結合可能なピースが無い、行き止まり
             if depth==1000:#パズル完成(仮) 条件考える必要あり
