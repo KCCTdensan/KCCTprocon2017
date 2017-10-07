@@ -211,33 +211,26 @@ class piece:
         return ret
 
     def rotate(self,another,self_vertex1,self_vertex2,another_vertex1,another_vertex2):
-
-        shifted_another_piece_vertexes=another.vertexes-(another.vertexes[another_vertex1]-self.vertexes[self_vertex1])
-
         #辺のベクトルをもとめる！
         vecter_self = self.vertexes[self_vertex2]-self.vertexes[self_vertex1];
         vecter_another = another.vertexes[another_vertex2]-another.vertexes[another_vertex1];
 
-        #ベクトルの内積をもとめる！
-        inner_product = numpy.dot(vecter_self,vecter_another);
-
-        #ベクトルの大きさをもとめる！
-        length_vecter_self = numpy.linalg.norm(vecter_self);
-        length_vecter_another = numpy.linalg.norm(vecter_another);
-
+        #ベクトルの内積をもとめる！・・・は説明変数無しに1行にまとめる!
+        #ベクトルの大きさをもとめる！・・・も説明変数無しに1行にまとめる!
         #θをもとめる！
-        cos_theta_vecters = inner_product/length_vecter_self*length_vecter_another;
-        sin_theta_vecters = 1-(cos_theta_vecters*cos_theta_vecters);
+        rotate_angle = math.acos(numpy.dot(vecter_self,vecter_another); / (numpy.linalg.norm(vecter_self) * numpy.linalg.norm(vecter_another)))
 
-        #回転行列で回転後の座標をもとめる！
+        #回転行列をもとめる！
         rotate_matrix = numpy.matrix([
-            [cos_theta_vecters , -sin_theta_vecters],
-            [sin_theta_vecters , cos_theta_vecters]
+            [numpy.cos(rotate_angle) , -numpy.sin(rotate_angle)],
+            [numpy.sin(rotate_angle) , numpy.cos(rotate_angle)]
             ])
 
-        rotated_another_vertexes = rotate_matrix*another.vertexes[another_vertex1];
-
-        
+        #回転行列で回転後の座標をもとめる！
+        shifted_another_piece=copy.deepcopy(another)
+        shifted_another_piece.vertexes=shifted_another_piece.vertexes-(another.vertexes[another_vertex1]-self.vertexes[self_vertex1])
+        shifted_another_piece.vertexes=(rotate_matrix*shifted_another_piece.vertexes.T).T
+        return shifted_another_piece
 
     def flip(self):
         self.vertexes[:,0]*=-1
