@@ -86,19 +86,19 @@ class problem:
         if len(match_frames)==0: #結合可能なピースが無い、行き止まり
             if depth==1000:#パズル完成(仮) #FIXME:条件考える必要あり
                 self.merge_history=history
-                return true
+                return True
             if depth > depth_max:#FIXME:おそらくdepth_maxアクセス出来ない
                 self.merge_history=history
                 self.gui_api.draw_history(self)
-            return false
+            return False
 
         #再帰部
         same_value_frames=[] #評価値が等しいframeを格納するリスト
         for i,match_frame in enumerate(match_frames): #結合後のframeを全て見る
             if match_frames[i][1]!=match_frames[i+1][1]: #評価値が等しいframeを格納し終えたとき
-                if dfs(same_value_frames,same_value_frames[0][1],depth+1)==true: #それらを引数にして再帰
-                    return true
+                if dfs(same_value_frames,same_value_frames[0][1],depth+1)==True: #それらを引数にして再帰
+                    return True
             else:
                 same_value_frames.append(match_frames[i]) #評価値が等しいframeを追加していく
-        return false
+        return False
 
