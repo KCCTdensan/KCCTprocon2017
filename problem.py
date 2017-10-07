@@ -65,9 +65,9 @@ class problem:
         
 
         pieces: 
-            pieceと評価値のタプルのリスト
+            piece,評価値,フレームの頂点,ピースの頂点のタプルのリスト
         戻り値:
-            pieceと評価値のタプルのリスト
+            piece,評価値,フレームの頂点,ピースの頂点のタプルのリスト
         """
         return sorted(pieces, key = lambda t: t[1], reverse = True)
 
@@ -75,13 +75,13 @@ class problem:
         """枠にはまるピースのリストを枠と結合し、リストにまとめて返します(frame)。
 
         pieces: 
-            pieceの評価値とタプルのリスト
+            piece,評価値,フレームの頂点,ピースの頂点のタプルのリスト
         戻り値:
             pieceと評価値のタプルのリスト(frame)
         """
         frames=[]
         for P in pieces:
-            frames += [self.frame.merge(P[0]),P[1]]
+            frames += [self.frame.merge(P[0],P[2],p[3]),P[1]]
 
         return frames
 
