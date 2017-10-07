@@ -36,7 +36,7 @@ class problem:
 
         ret=[]
         for enable_piece in enable_pieces:
-            ret.append((enable_piece[0],evaluation.calc_eval_value(frame_and_hist[0],enable_piece[0].vertexes),enable_piece[1],enable_piece[2],enable_piece[3],enable_piece[4]))
+            ret.append((enable_piece[0],evaluation.evaluation.calc_eval_value(frame_and_hist[0],enable_piece[0].vertexes),enable_piece[1],enable_piece[2],enable_piece[3],enable_piece[4]))
         return ret
 
     def sorting(self,pieces):
@@ -61,7 +61,7 @@ class problem:
         """
         frames=[]
         for P in pieces:
-            frames += [frame[0].merge(P[0],P[2],p[4]),P[1],frame[1].append((frame[0],P[0],P[2],P[3],P[4],P[5]))]
+            frames += [frame[0].merge(P[0],P[2],P[4]),P[1],frame[1].append((frame[0],P[0],P[2],P[3],P[4],P[5]))]
         return frames
 
     def dfs_corner(self,frames,history,depth):

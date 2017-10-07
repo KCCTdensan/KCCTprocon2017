@@ -38,11 +38,11 @@ class evaluation:
         また、piece_vertexesに渡す各頂点の座標は枠(frame)に対して正確な位置である必要があります。
         """
         ret=0
-        verf=len(frame)
+        verf=len(frame.vertexes)
         verp=len(piece_vertexes)
-        for i in range(0,verf):
-            for j in range(0,verp):
-                if evaluation.__linea_on_lineb(piece_vertexes[j],piece_vertexes[(j+1)%verp],frame[i],frame[(i+1)%verf]):
+        for i in range(verf):
+            for j in range(verp):
+                if evaluation.__linea_on_lineb(piece_vertexes[j],piece_vertexes[(j+1)%verp],frame.vertexes[i],frame.vertexes[(i+1)%verf]):
                     ret+=1
         return ret
 
@@ -57,7 +57,7 @@ class evaluation:
         frameとpiece_vertexesに渡す配列の座標は(x,y)で表される必要があります。
         また、piece_vertexesに渡す各頂点の座標は枠(frame)に対して正確な位置である必要があります。
         """
-        return len(set(map(tuple,frame))&set(map(tuple,piece_vertexes)))
+        return len(set(map(tuple,frame.vertexes))&set(map(tuple,piece_vertexes)))
 
     def calc_eval_value(frame,piece_vertexes):
         """枠に対するピースの位置の評価値を返します。
@@ -71,4 +71,4 @@ class evaluation:
         frameとpiece_vertexesに渡す配列の座標は(x,y)で表され、順番になっている必要があります。
         また、piece_vertexesに渡す各頂点の座標は枠(frame)に対して正確な位置である必要があります。
         """
-        return calc_num_of_matched_vertexes(frame,piece_vertexes)+calc_num_of_overlapped_lines(frame,piece_vertexes)
+        return evaluation.calc_num_of_matched_vertexes(frame,piece_vertexes)+evaluation.calc_num_of_overlapped_lines(frame,piece_vertexes)
