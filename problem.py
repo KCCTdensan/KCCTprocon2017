@@ -1,5 +1,4 @@
-from evaluation import evaluation
-evaluation=evaluation()
+import evaluation
 
 class problem:
     def __init__(self,pieces,frame):
@@ -7,7 +6,7 @@ class problem:
         self.frame = frame
         self.merge_history = []
 
-    def search_match_pieces(self,frame):
+    def search_match_pieces(self,frame_and_hist):
         """枠にはまるピースを探索し、評価値をつけ、リストにまとめて返します。
 
         frame:
@@ -21,19 +20,13 @@ class problem:
         """
         enable_pieces=[] #枠と結合可能なピース,結合する枠の頂点,結合するピースの頂点のタプルをここに格納
         for piece in self.pieces: #全てのピースをみる
-            for i,frame_vertex in enumerate(frame[0].vertexes): #フレームの頂点全てをみる
+            for i,frame_vertex in enumerate(frame_and_hist[0].vertexes): #フレームの頂点全てをみる
                 for j,piece_vertex in enumerate(piece.vertexes): #1ピースの頂点全てをみる
 
-                    frame_vertex1=frame[0].vertexes[i]
+                    frame_vertex1=frame_and_hist[0].vertexes[i]
                     piece_vertex1=piece.vertexes[j]
-                    if frame_vertex1==len(frame[0].vertexes):
-                        frame_vertex2=frame[0].vertexses[0]
-                    else:
-                        frame_vertex2=frame[0].vertexses[i+1]
-                    if piece_vertex1==len(piece.vertexes):
-                        piece_vertex2=piece.vertexses[0]
-                    else:
-                        piece_vertex2=frame[0].vertexses[j+1]
+                    frame_vertex2=frame_and_hist[0].vertexes[(i+1)%len(frame_and_hist[0].vertexes)]
+                    piece_vertex2=piece.vertexes[(j+1)%len(piece.vertexes)]
 
                     #回転→is_overlapped()→merge()→is_on_grid()     結合判定
                     #     ↑←frip()←←←↓                          結合判定 piece内で関数作るべき？
@@ -43,7 +36,7 @@ class problem:
 
         ret=[]
         for enable_piece in enable_pieces:
-            ret.append((enable_piece[0],evaluation.calc_eval_value(frame[0],enable_piece[0].vertexes),enable_piece[1],enable_piece[2],enable_piece[3],enable_piece[4]))
+            ret.append((enable_piece[0],evaluation.calc_eval_value(frame_and_hist[0],enable_piece[0].vertexes),enable_piece[1],enable_piece[2],enable_piece[3],enable_piece[4]))
         return ret
 
     def sorting(self,pieces):

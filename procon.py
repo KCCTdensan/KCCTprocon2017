@@ -26,7 +26,7 @@ gui=GUI.GUI(root_problem)
 #gui.draw_history(root_problem)
 
 def search():
-    root_problem.dfs_corner((root_problem.frame,[]),[],0)
+    root_problem.dfs_corner([(root_problem.frame,[])],[],0)
 searching_thread=threading.Thread(target=search) 
 searching_thread.start()
 
