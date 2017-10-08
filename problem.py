@@ -36,7 +36,7 @@ class problem:
 
         ret=[]
         for enable_piece in enable_pieces:
-            ret.append((enable_piece[0],evaluation.evaluation.calc_eval_value(frame_and_hist[0],enable_piece[0].vertexes),enable_piece[1],enable_piece[2],enable_piece[3],enable_piece[4]))
+            ret.append((enable_piece[0],evaluation.evaluation.calc_eval_value(frame_and_hist[0].vertexes,enable_piece[0].vertexes),enable_piece[1],enable_piece[2],enable_piece[3],enable_piece[4]))
         return ret
 
     def sorting(self,pieces):
@@ -84,7 +84,7 @@ class problem:
             match_frames=self.merge_pieces(frame,self.sorting(self.search_match_pieces(frame)))
             #結合可能なピースを評価値順にソートし、枠と結合する
         if len(match_frames)==0: #結合可能なピースが無い、行き止まり
-            if depth==1000:#パズル完成(仮) #FIXME:条件考える必要あり
+            if depth==len(self.pieces): #パズル完成
                 self.merge_history=history
                 return True
             if depth > depth_max:#FIXME:おそらくdepth_maxアクセス出来ない

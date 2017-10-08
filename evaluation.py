@@ -26,10 +26,10 @@ class evaluation:
     def __linea_on_lineb(pointla1,pointla2,pointlb1,pointlb2):
         return(evaluation.__point_on_line(pointlb1,pointlb2,pointla1)and evaluation.__point_on_line(pointlb1,pointlb2,pointla2))
 
-    def calc_num_of_overlapped_lines(frame,piece_vertexes):
+    def calc_num_of_overlapped_lines(frame_vertexes,piece_vertexes):
         """枠の各辺とピースの各辺が重なる数を返します。
 
-        frame:
+        frame_vertexes:
             枠の各頂点の座標の配列
         piece_vertexes:
             ピースの各頂点の座標の配列
@@ -38,18 +38,18 @@ class evaluation:
         また、piece_vertexesに渡す各頂点の座標は枠(frame)に対して正確な位置である必要があります。
         """
         ret=0
-        verf=len(frame.vertexes)
+        verf=len(frame_vertexes)
         verp=len(piece_vertexes)
         for i in range(verf):
             for j in range(verp):
-                if evaluation.__linea_on_lineb(piece_vertexes[j],piece_vertexes[(j+1)%verp],frame.vertexes[i],frame.vertexes[(i+1)%verf]):
+                if evaluation.__linea_on_lineb(piece_vertexes[j],piece_vertexes[(j+1)%verp],frame_vertexes[i],frame_vertexes[(i+1)%verf]):
                     ret+=1
         return ret
 
-    def calc_num_of_matched_vertexes(frame,piece_vertexes):
+    def calc_num_of_matched_vertexes(frame_vertexes,piece_vertexes):
         """枠の各頂点の座標とピースの各頂点の座標が重なる数を返します。
         
-        frame:
+        frame_vertexes:
             枠の各頂点の座標の配列
         piece_vertexes:
             ピースの各頂点の座標の配列
@@ -57,12 +57,12 @@ class evaluation:
         frameとpiece_vertexesに渡す配列の座標は(x,y)で表される必要があります。
         また、piece_vertexesに渡す各頂点の座標は枠(frame)に対して正確な位置である必要があります。
         """
-        return len(set(map(tuple,frame.vertexes))&set(map(tuple,piece_vertexes)))
+        return len(set(map(tuple,frame_vertexes))&set(map(tuple,piece_vertexes)))
 
-    def calc_eval_value(frame,piece_vertexes):
+    def calc_eval_value(frame_vertexes,piece_vertexes):
         """枠に対するピースの位置の評価値を返します。
 
-        frame:
+        frame_vertexes:
             枠の各頂点の座標の配列
         piece_vertexes:
             ピースの各頂点の座標の配列
@@ -71,4 +71,4 @@ class evaluation:
         frameとpiece_vertexesに渡す配列の座標は(x,y)で表され、順番になっている必要があります。
         また、piece_vertexesに渡す各頂点の座標は枠(frame)に対して正確な位置である必要があります。
         """
-        return evaluation.calc_num_of_matched_vertexes(frame,piece_vertexes)+evaluation.calc_num_of_overlapped_lines(frame,piece_vertexes)
+        return evaluation.calc_num_of_matched_vertexes(frame_vertexes,piece_vertexes)+evaluation.calc_num_of_overlapped_lines(frame_vertexes,piece_vertexes)
