@@ -98,7 +98,7 @@ class problem:
         #再帰部
         same_value_frames=[] #評価値が等しいframeを格納するリスト
         for i,match_frame in enumerate(match_frames): #結合後のframeを全て見る
-            if match_frames[i][1]!=match_frames[i+1][1]: #評価値が等しいframeを格納し終えたとき
+            if match_frames[i][1]!=match_frames[i-1][1]: #評価値が等しいframeを格納し終えたとき
                 if dfs(same_value_frames,same_value_frames[0][1],depth+1)==True: #それらを引数にして再帰
                     return True
             else:
