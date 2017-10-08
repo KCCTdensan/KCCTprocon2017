@@ -12,6 +12,12 @@ import problem
 #b=piece.piece(numpy.array([[0,0],[10,10],[0,10]]))
 #print(a.is_overlapped(b,0,3,0,2))
 
+#piece.mergeデバッグ
+import piece
+a=piece.piece(numpy.array([[0,0],[10,0],[10,10],[0,10]]))
+b=piece.piece(numpy.array([[0,0],[10,0],[10,10],[0,10]]))
+print(a.merge(b,1,2,0,3))
+
 import QR
 root_problem=problem.problem(*QR.read_QR())
 
@@ -25,6 +31,7 @@ root_problem.gui_api=gui
 #root_problem.pieces.pop(0)
 #root_problem.merge_history.append((copy.deepcopy(root_problem.frame),root_problem.pieces[0],0,1,0,1))
 #gui.draw_history(root_problem)
+
 
 def search():
     root_problem.dfs_corner([(root_problem.frame,[])],[],0)

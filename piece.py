@@ -159,12 +159,14 @@ class piece:
                     '''
                     #新ピースの頂点一覧行き(仮)
                     #そしてanotherの頂点を記録し始める
+                    print("sV1 ",self.vertexes[num])
                     bond.append(self.vertexes[num])
                     num = samelistA[samelistS.index(num)] + 1
                     SA = 1
                     if num >= another.vertexes.shape[0]:
                         num = 0
                 else:
+                    print("sV2 ",self.vertexes[num])
                     bond.append(self.vertexes[num])
                     num += 1
                     if num >= self.vertexes.shape[0]:
@@ -183,12 +185,14 @@ class piece:
                     '''
                     #新ピースの頂点一覧行き(仮)
                     #そしてselfの頂点を記録し始める
+                    print("aV1 ",another.vertexes[num])
                     bond.append(another.vertexes[num])
                     num = samelistS[samelistA.index(num)] + 1
                     SA = 0
                     if num >= self.vertexes.shape[0]:
                         num = 0
                 else:
+                    print("aV2 ",another.vertexes[num])
                     bond.append(another.vertexes[num])
                     num += 1
                     if num >= another.vertexes.shape[0]:
@@ -231,7 +235,7 @@ class piece:
         #回転行列で回転後の座標をもとめる！
         shifted_another_piece=copy.deepcopy(another)
         shifted_another_piece.vertexes=shifted_another_piece.vertexes-(another.vertexes[another_vertex1]-self.vertexes[self_vertex1])
-        shifted_another_piece.vertexes=(rotate_matrix*shifted_another_piece.vertexes.T).T
+        shifted_another_piece.vertexes=numpy.squeeze(numpy.asarray((rotate_matrix*shifted_another_piece.vertexes.T).T))
         return shifted_another_piece
 
     def flip(self):
