@@ -197,6 +197,8 @@ class piece:
             if (SA == 0) and (num == 0):
                 break
         #角度がpiなど頂点としての体を成していない頂点を削除
+
+        print("D E B U G",bond)#ただのarray[[x y],[],[],[].....]じゃないとだめなのに中にまたarrayが入ってる
         ret = piece(numpy.array(bond))
         invalid = []
         for i in range(ret.vertexes.shape[0]):
