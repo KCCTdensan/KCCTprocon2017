@@ -5,6 +5,7 @@ import threading
 
 import GUI
 import problem
+import piece
 
 #is_overlappedデバッグ
 #import piece
@@ -33,3 +34,6 @@ searching_thread.start()
 
 gui.root.mainloop()
 depth_max=0
+
+testpiece=piece.piece()
+piece.piece.is_cross()
