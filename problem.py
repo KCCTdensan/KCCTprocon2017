@@ -23,10 +23,10 @@ class problem:
             for i,frame_vertex in enumerate(frame_and_hist[0].vertexes): #フレームの頂点全てをみる
                 for j,piece_vertex in enumerate(piece.vertexes): #1ピースの頂点全てをみる
 
-                    frame_vertex1=frame_and_hist[0].vertexes[i]
-                    piece_vertex1=piece.vertexes[j]
-                    frame_vertex2=frame_and_hist[0].vertexes[(i+1)%len(frame_and_hist[0].vertexes)]
-                    piece_vertex2=piece.vertexes[(j+1)%len(piece.vertexes)]
+                    frame_vertex1=i
+                    piece_vertex1=j
+                    frame_vertex2=(i+1)%len(frame_and_hist[0].vertexes)
+                    piece_vertex2=(j+1)%len(piece.vertexes)
 
                     #回転→is_overlapped()→merge()→is_on_grid()     結合判定
                     #     ↑←frip()←←←↓                          結合判定 piece内で関数作るべき？
