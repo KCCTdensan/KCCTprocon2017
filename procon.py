@@ -35,5 +35,5 @@ searching_thread.start()
 gui.root.mainloop()
 depth_max=0
 
-testpiece=piece.piece()
-piece.piece.is_cross()
+testpiece_ver=numpy.array([(0,0),(10,0),(10,10),(0,10)])
+print(piece.piece.is_cross(testpiece_ver,testpiece_ver[0],testpiece_ver[-1]+testpiece_ver[1],0) )

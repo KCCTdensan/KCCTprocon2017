@@ -238,15 +238,15 @@ class piece:
         self.vertexes[:,0]*=-1
         self.vertexes[:,0]-=min(self.vertexes[:,0])
 
-    def is_cross(self,vertexes,origin,vec_sum,e):
+    def is_cross(self,vertexes,origin,vec_sum,j):
         count = 0
         vertexes_shifted=vertexes-origin
         len_shifted = len(vertexes_shifted)
         vec_sum = vec_sum*100
         for i in range(1,len_shifted - 2):
-            vertex_1 = vertexes_shifted[(e + i) % len_shifted]
-            vertex_2 = vertexes_shifted[(e + i + 1) % len_shifted]
-            vertex_3 = vertexes_shifted[(e + i + 2) % len_shifted]
+            vertex_1 = vertexes_shifted[(j + i) % len_shifted]
+            vertex_2 = vertexes_shifted[(j + i + 1) % len_shifted]
+            vertex_3 = vertexes_shifted[(j + i + 2) % len_shifted]
             ax = 0
             ay = 0
             bx = vec_sum[0]
