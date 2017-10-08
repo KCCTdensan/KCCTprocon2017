@@ -36,7 +36,7 @@ class problem:
 
         ret=[]
         for enable_piece in enable_pieces:
-            ret.append((enable_piece[0],evaluation.evaluation.calc_eval_value(frame_and_hist[0],enable_piece[0].vertexes),enable_piece[1],enable_piece[2],enable_piece[3],enable_piece[4]))
+            ret.append((enable_piece[0],evaluation.evaluation.calc_eval_value(frame_and_hist[0].vertexes,enable_piece[0].vertexes),enable_piece[1],enable_piece[2],enable_piece[3],enable_piece[4]))
         return ret
 
     def sorting(self,pieces):
