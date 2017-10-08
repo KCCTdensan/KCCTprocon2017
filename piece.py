@@ -160,14 +160,14 @@ class piece:
                     #新ピースの頂点一覧行き(仮)
                     #そしてanotherの頂点を記録し始める
                     print("sV1 ",self.vertexes[num])
-                    bond.append(self.vertexes[num])
+                    bond.append(self.vertexes[num].tolist())
                     num = samelistA[samelistS.index(num)] + 1
                     SA = 1
                     if num >= another.vertexes.shape[0]:
                         num = 0
                 else:
                     print("sV2 ",self.vertexes[num])
-                    bond.append(self.vertexes[num])
+                    bond.append(self.vertexes[num].tolist())
                     num += 1
                     if num >= self.vertexes.shape[0]:
                         num = 0
@@ -186,14 +186,14 @@ class piece:
                     #新ピースの頂点一覧行き(仮)
                     #そしてselfの頂点を記録し始める
                     print("aV1 ",another.vertexes[num])
-                    bond.append(another.vertexes[num])
+                    bond.append(another.vertexes[num].tolist())
                     num = samelistS[samelistA.index(num)] + 1
                     SA = 0
                     if num >= self.vertexes.shape[0]:
                         num = 0
                 else:
                     print("aV2 ",another.vertexes[num])
-                    bond.append(another.vertexes[num])
+                    bond.append(another.vertexes[num].tolist())
                     num += 1
                     if num >= another.vertexes.shape[0]:
                         num = 0

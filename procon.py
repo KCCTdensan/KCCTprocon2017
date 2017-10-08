@@ -13,10 +13,10 @@ import problem
 #print(a.is_overlapped(b,0,3,0,2))
 
 #piece.mergeデバッグ
-import piece
-a=piece.piece(numpy.array([[0,0],[10,0],[10,10],[0,10]]))
-b=piece.piece(numpy.array([[0,0],[10,0],[10,10],[0,10]]))
-print(a.merge(b,1,2,0,3))
+#import piece
+#a=piece.piece(numpy.array([[0,0],[10,0],[10,10],[0,10]]))
+#b=piece.piece(numpy.array([[0,0],[10,0],[10,10],[0,10]]))
+#print(a.merge(b,1,2,0,3).vertexes)
 
 import QR
 root_problem=problem.problem(*QR.read_QR())
