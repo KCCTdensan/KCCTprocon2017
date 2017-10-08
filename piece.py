@@ -63,7 +63,7 @@ class piece:
         #変数の書き換えを防ぐ
         another = anotherD
         #回転
-        another = another.rotate(self,self_vertex1,self_vertex2,another_vertex1,another_vertex2)
+        another = self.rotate(another,self_vertex1,self_vertex2,another_vertex1,another_vertex2)
         #selfとanotherの差を取得
         dx = self.vertexes[self_vertex1,0] - another.vertexes[another_vertex1,0]
         dy = self.vertexes[self_vertex1,1] - another.vertexes[another_vertex1,1]
@@ -202,7 +202,6 @@ class piece:
                 break
         #角度がpiなど頂点としての体を成していない頂点を削除
 
-        print("D E B U G",bond)#ただのarray[[x y],[],[],[].....]じゃないとだめなのに中にまたarrayが入ってる
         ret = piece(numpy.array(bond))
         invalid = []
         for i in range(ret.vertexes.shape[0]):
