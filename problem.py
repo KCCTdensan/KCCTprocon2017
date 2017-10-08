@@ -80,6 +80,8 @@ class problem:
         戻り値: bool
         """
 
+        print("深さ",depth)
+        print("frames",frames)
         for frame in frames:
             match_frames=self.merge_pieces(frame,self.sorting(self.search_match_pieces(frame)))
             #結合可能なピースを評価値順にソートし、枠と結合する

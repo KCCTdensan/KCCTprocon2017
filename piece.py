@@ -13,7 +13,7 @@ class piece:
             if self.is_cross(vertexes,vertex,vec_front + vec_back) == False:
                 angle = 2 * math.pi - angle
             self.angles.append(angle)
-        print("角度 度",[numpy.rad2deg(i) for i in self.angles])
+        #print("角度 度",[numpy.rad2deg(i) for i in self.angles])
 
     def is_on_grid(self):
         """
@@ -159,14 +159,14 @@ class piece:
                     '''
                     #新ピースの頂点一覧行き(仮)
                     #そしてanotherの頂点を記録し始める
-                    print("sV1 ",self.vertexes[num])
+                    #print("sV1 ",self.vertexes[num])
                     bond.append(self.vertexes[num].tolist())
                     num = samelistA[samelistS.index(num)] + 1
                     SA = 1
                     if num >= another.vertexes.shape[0]:
                         num = 0
                 else:
-                    print("sV2 ",self.vertexes[num])
+                    #print("sV2 ",self.vertexes[num])
                     bond.append(self.vertexes[num].tolist())
                     num += 1
                     if num >= self.vertexes.shape[0]:
@@ -185,14 +185,14 @@ class piece:
                     '''
                     #新ピースの頂点一覧行き(仮)
                     #そしてselfの頂点を記録し始める
-                    print("aV1 ",another.vertexes[num])
+                    #print("aV1 ",another.vertexes[num])
                     bond.append(another.vertexes[num].tolist())
                     num = samelistS[samelistA.index(num)] + 1
                     SA = 0
                     if num >= self.vertexes.shape[0]:
                         num = 0
                 else:
-                    print("aV2 ",another.vertexes[num])
+                    #print("aV2 ",another.vertexes[num])
                     bond.append(another.vertexes[num].tolist())
                     num += 1
                     if num >= another.vertexes.shape[0]:
@@ -205,7 +205,7 @@ class piece:
         ret = piece(numpy.array(bond))
         invalid = []
         for i in range(ret.vertexes.shape[0]):
-            print(ret.angles[i])
+            #print(ret.angles[i])
             if (ret.angles[i] == math.pi) or (ret.angles[i] == math.pi * 2) or (ret.angles[i] == 0):
                 invalid.append(i)
         invalid.reverse()
