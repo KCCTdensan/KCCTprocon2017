@@ -262,6 +262,7 @@ class piece:
             #通常交差
             if (tc * td < 0) and (ta * tb < 0):
                 count+=1
+                print("count check",count)
             #頂点パターン1-3
             if (td == 0):
                 #交差パターン3
