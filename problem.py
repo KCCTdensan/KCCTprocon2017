@@ -29,13 +29,12 @@ class problem:
                     frame_vertex2=(i+1)%len(frame_and_hist[0].vertexes)
                     piece_vertex2=(j+1)%len(piece.vertexes)
 
-                    if frame_and_hist[0].is_merge(piece,frame_vertex1,frame_vertex2,piece_vertex1,piece_vertex2):
-                        enable_pieces.append((piece,frame_vertex1,frame_vertex2,piece_vertex1,piece_vertex2))
+                    #回転→is_overlapped()→merge()→is_on_grid()     結合判定
+                    #     ↑←frip()←←←↓                          結合判定 piece内で関数作るべき？
 
-        ret=[]
-        for enable_piece in enable_pieces:
-            ret.append((enable_piece[0],evaluation.evaluation.calc_eval_value(frame_and_hist[0].vertexes,enable_piece[0].vertexes),enable_piece[1],enable_piece[2],enable_piece[3],enable_piece[4]))
-        return ret
+                    enable_pieces.append((piece,frame_vertex1,frame_vertex2,piece_vertex1,piece_vertex2)) 
+                    enable_pieces.append((piece,frame_vertex1,frame_vertex2,piece_vertex2,piece_vertex1))#逆
+        return [(enable_piece[0],evaluation.evaluation.calc_eval_value(frame_and_hist[0].vertexes,enable_piece[0].vertexes),enable_piece[1],enable_piece[2],enable_piece[3],enable_piece[4])for enable_piece in enable_pieces]
 
     def sorting(self,pieces):
         """枠にはまるピースのリストを評価値順に降順にソートします。
@@ -63,7 +62,7 @@ class problem:
 
         frames=[]
         for P in pieces:
-            frames += [frame[0].merge(P[0],P[2],P[3],P[4],P[5]),P[1],frame[1].append((frame[0],P[0],P[2],P[3],P[4],P[5]))]
+            frames += [frame[0].merge(P[0],P[2],P[3],P[4],P[5]),P[1],frame[1]+[(frame[0],P[0],P[2],P[3],P[4],P[5])]]
         return frames
 
     def dfs_corner(self,frames,history,depth):
