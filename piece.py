@@ -10,7 +10,7 @@ class piece:
             vec_back = vertexes[(i - 1 + len(vertexes)) % len(vertexes)] - vertex
             inner_product = numpy.dot(vec_front,vec_back)
             angle = math.acos(inner_product / (numpy.linalg.norm(vec_front) * numpy.linalg.norm(vec_back)))
-            if self.is_cross(vertexes,vertex,vec_front + vec_back) == False:
+            if self.is_cross(vertexes,vertex,vec_front + vec_back,i) == False:
                 angle = 2 * math.pi - angle
             self.angles.append(angle)
         #print("角度 度",[numpy.rad2deg(i) for i in self.angles])
@@ -241,21 +241,23 @@ class piece:
         self.vertexes[:,0]*=-1
         self.vertexes[:,0]-=min(self.vertexes[:,0])
 
-    def is_cross(self,vertexes,origin,vec_sum):
+    def is_cross(self,vertexes,origin,vec_sum,j):
         count = 0
         vertexes_shifted=vertexes-origin
+        len_shifted = len(vertexes_shifted)
         vec_sum = vec_sum*100
-        for i,vertex in enumerate(vertexes_shifted):
-            vertex_2=vertexes_shifted[(i + 1) % len(vertexes_shifted)]
-            vertex_3=vertexes_shifted[(i + 2) % len(vertexes_shifted)]
-            bx=vec_sum[0]
-            by=vec_sum[1]
-            cx=vertex[0]
-            cy=vertex[1]
-            dx=vertex_2[0]
-            dy=vertex_2[1]
+        for i in range(1,len_shifted - 2):
+            vertex_1 = vertexes_shifted[(j + i) % len_shifted]
+            vertex_2 = vertexes_shifted[(j + i + 1) % len_shifted]
+            vertex_3 = vertexes_shifted[(j + i + 2) % len_shifted]
             ax = 0
             ay = 0
+            bx = vec_sum[0]
+            by = vec_sum[1]
+            cx = vertex_1[0]
+            cy = vertex_1[1]
+            dx = vertex_2[0]
+            dy = vertex_2[1]
             ta = (cx - dx) * (ay - cy) + (cy - dy) * (cx - ax)
             tb = (cx - dx) * (by - cy) + (cy - dy) * (cx - bx)
             tc = (ax - bx) * (cy - ay) + (ay - by) * (ax - cx)
@@ -263,13 +265,14 @@ class piece:
             #通常交差
             if (tc * td < 0) and (ta * tb < 0):
                 count+=1
+                print("count check",count)
             #頂点パターン1-3
             if (td == 0):
                 #交差パターン3
                 if(ta == 0 and tb == 0 and tc == 0 and td == 0):
                     count = count
                 #交差パターン2
-                elif(self.is_cross_2(0,0,vec_sum[0],vec_sum[1],vertex[0],vertex[1],vertex_3[0],vertex_3[1])):
+                elif(self.is_cross_2(ax,ay,bx,by,cx,cy,vertex_3[0],vertex_3[1])):
                     count = count
                 #交差パターン1
                 else:
