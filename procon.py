@@ -19,6 +19,12 @@ import piece
 #b=piece.piece(numpy.array([[0,0],[10,0],[10,10],[0,10]]))
 #print(a.merge(b,1,2,0,3).vertexes)
 
+#piece.is_mergeデバッグ
+#import piece
+#a=piece.piece(numpy.array([[0,0],[10,0],[10,10],[0,10]]))
+#b=piece.piece(numpy.array([[0,0],[10,0],[10,10],[0,10]]))
+#print(a.is_merge(b,1,2,0,3))
+
 import QR
 root_problem=problem.problem(*QR.read_QR())
 

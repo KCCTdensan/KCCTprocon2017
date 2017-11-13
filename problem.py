@@ -29,11 +29,8 @@ class problem:
                     frame_vertex2=(i+1)%len(frame_and_hist[0].vertexes)
                     piece_vertex2=(j+1)%len(piece.vertexes)
 
-                    #回転→is_overlapped()→merge()→is_on_grid()     結合判定
-                    #     ↑←frip()←←←↓                          結合判定 piece内で関数作るべき？
-
-                    enable_pieces.append((piece,frame_vertex1,frame_vertex2,piece_vertex1,piece_vertex2)) 
-                    enable_pieces.append((piece,frame_vertex1,frame_vertex2,piece_vertex2,piece_vertex1))#逆
+                    if frame_and_hist[0].is_merge(piece,frame_vertex1,frame_vertex2,piece_vertex1,piece_vertex2):
+                        enable_pieces.append((piece,frame_vertex1,frame_vertex2,piece_vertex1,piece_vertex2))
 
         ret=[]
         for enable_piece in enable_pieces:

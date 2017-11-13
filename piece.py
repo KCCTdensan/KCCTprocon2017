@@ -72,6 +72,8 @@ class piece:
         another.vertexes[:,1] += dy
         return another
 
+
+
     def merge(self,anotherD,self_vertex1,self_vertex2,another_vertex1,another_vertex2):
         """
         selfのピースとanotherのピースを結合
@@ -286,3 +288,30 @@ class piece:
         td = (ax - bx) * (dy - ay) + (ay - by) * (ax - dx)
 
         return (tc * td < 0) and (ta * tb < 0)
+
+    def is_merge(self,another,self_vertex1,self_vertex2,another_vertex1,another_vertex2):
+        """
+        selfのピースとanotherのピースが統合できるかどうか判定します
+
+        another:piece
+            ピース
+        self_vertex1:
+            selfピースの頂点の番号 anotherピースの頂点another_vertex1と重なるように結合する
+        self_vertex2:
+            selfピースのもう一つの頂点の番号
+        another_vertex1:
+            anotherピースの頂点の番号
+        another_vertex2:
+            anotherピースのもう一つの頂点の番号
+        """
+        #回転→is_overlapped()→merge()→is_on_grid()     
+        #     ↑←frip()←←←↓                          結合判定
+        flip_frag=False
+        for i in range(2):
+            self.rotate(another,self_vertex1,self_vertex2,another_vertex1,another_vertex2)
+            if  self.is_overlapped(another,self_vertex1,self_vertex2,another_vertex1,another_vertex2):
+                self.merge(another,self_vertex1,self_vertex2,another_vertex1,another_vertex2)
+                if self.is_on_grid()==True:
+                    return True
+            self.flip()
+        return False
